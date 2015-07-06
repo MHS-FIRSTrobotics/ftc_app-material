@@ -39,15 +39,11 @@ import android.os.Environment;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.qualcomm.ftccommon.DbgLog;
 import com.qualcomm.robotcore.util.RobotLog;
-import com.qualcomm.robotcore.util.RunShellCommand;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -59,7 +55,7 @@ import java.io.Serializable;
 public class ViewLogsActivity extends Activity {
 
   TextView textAdbLogs;
-  int DEFAULT_NUMBER_OF_LINES = 300;
+  final int DEFAULT_NUMBER_OF_LINES = 300;
   public static final String FILENAME = "Filename";
 
   String filepath = " ";

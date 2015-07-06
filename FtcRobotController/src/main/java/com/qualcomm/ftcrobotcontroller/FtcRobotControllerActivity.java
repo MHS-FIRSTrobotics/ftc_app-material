@@ -38,7 +38,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -203,11 +202,6 @@ public class FtcRobotControllerActivity extends Activity {
   }
 
   @Override
-  protected void onResume() {
-    super.onResume();
-  }
-
-  @Override
   public void onPause() {
     super.onPause();
   }
@@ -253,7 +247,7 @@ public class FtcRobotControllerActivity extends Activity {
         requestRobotRestart();
         return true;
       case R.id.action_settings:
-        startActivity(new Intent(getBaseContext(), FtcRobotControllerSettingsActivity.class));
+        startActivity(new Intent(getBaseContext(), SettingsActivity.class));
         return true;
       case R.id.action_about:
         startActivity(new Intent(getBaseContext(), AboutActivity.class));
@@ -262,7 +256,7 @@ public class FtcRobotControllerActivity extends Activity {
         finish();
         return true;
       case R.id.action_view_logs:
-        Intent viewLogsIntent = new Intent(VIEW_LOGS_ACTION);
+        Intent viewLogsIntent = new Intent(getBaseContext(), ViewLogsActivity.class);
         viewLogsIntent.putExtra(ViewLogsActivity.FILENAME, RobotLog.getLogFilename(this));
         startActivity(viewLogsIntent);
         return true;
@@ -272,17 +266,12 @@ public class FtcRobotControllerActivity extends Activity {
   }
 
   @Override
-  public void onConfigurationChanged(Configuration newConfig) {
-    super.onConfigurationChanged(newConfig);
-    // don't destroy assets on screen rotation
-  }
-  @Override
   protected void onActivityResult(int request, int result, Intent intent) {
     if (request == REQUEST_CONFIG_WIFI_CHANNEL) {
       if (result == RESULT_OK) {
         Toast toast = Toast.makeText(context, "Configuration Complete", Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
-        showToast(toast);
+        toast.show();
       }
     }
   }
@@ -310,20 +299,16 @@ public class FtcRobotControllerActivity extends Activity {
       // TODO: temp testing code. This will be removed in a future release
       try {
         factory = buildMockHardware();
-      } catch (RobotCoreException e) {
-        DbgLog.logStacktrace(e);
-        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-        return;
-      } catch (InterruptedException e) {
+      } catch (RobotCoreException | InterruptedException e) {
         DbgLog.logStacktrace(e);
         Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         return;
       }
-  } else {
+    } else {
       // Modern Robotics Factory for use with Modern Robotics hardware
-      ModernRoboticsHardwareFactory modernroboticsFactory = new ModernRoboticsHardwareFactory(context);
-      modernroboticsFactory.setXmlInputStream(fis);
-      factory = modernroboticsFactory;
+      ModernRoboticsHardwareFactory modernRoboticsFctry = new ModernRoboticsHardwareFactory(context);
+      modernRoboticsFctry.setXmlInputStream(fis);
+      factory = modernRoboticsFctry;
     }
 
     eventLoop = new FtcEventLoop(factory, callback);

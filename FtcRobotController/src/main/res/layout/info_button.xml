@@ -4,7 +4,7 @@
     <Button
       android:id="@+id/info_btn"
 
-      android:text="i"
+        android:text="@string/info"
       android:textColor="#FFFFFF"
       android:textSize="12sp"
       android:textStyle="bold"

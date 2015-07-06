@@ -16,8 +16,20 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
-    <Button
+
+      <Button
+          android:id="@+id/legacy_controller_cancelButton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginRight="5dp"
+          android:layout_marginEnd="5dp"
+          android:text="@string/cancel"
+          android:onClick="cancelLegacyController"
+          android:layout_gravity="center_horizontal" />
+
+      <Button
       android:id="@+id/legacy_controller_saveButton"
+          android:layout_toRightOf="@+id/legacy_controller_cancelButton"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginRight="5dp"
@@ -26,17 +38,7 @@
       android:onClick="saveLegacyController"
       android:layout_gravity="center_horizontal"/>
 
-    <Button
-      android:id="@+id/legacy_controller_cancelButton"
-      android:layout_toRightOf="@id/legacy_controller_saveButton"
-      android:layout_toEndOf="@id/legacy_controller_saveButton"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginRight="5dp"
-      android:layout_marginEnd="5dp"
-      android:text="@string/cancel"
-      android:onClick="cancelLegacyController"
-      android:layout_gravity="center_horizontal"/>
+
   </RelativeLayout>
 
   <!-- just draw a grey line -->
@@ -170,9 +172,7 @@
                     android:id="@+id/port1"
                     android:textStyle="bold"
                     android:textSize="22sp"
-                    android:paddingRight="20dp"
                     android:paddingEnd="20dp"
-                    android:paddingLeft="5dp"
                     android:paddingStart="5dp"
                     android:text="@string/row_port1"/>
 
@@ -205,9 +205,7 @@
                     android:id="@+id/port2"
                     android:textStyle="bold"
                     android:textSize="22sp"
-                    android:paddingRight="20dp"
                     android:paddingEnd="20dp"
-                    android:paddingLeft="5dp"
                     android:paddingStart="5dp"
                     android:text="@string/row_port2"/>
 
@@ -241,9 +239,8 @@
                     android:id="@+id/port3"
                     android:textStyle="bold"
                     android:textSize="22sp"
-                    android:paddingRight="20dp"
+
                     android:paddingEnd="20dp"
-                    android:paddingLeft="5dp"
                     android:paddingStart="5dp"
                     android:text="@string/row_port3"/>
                 <RelativeLayout
@@ -275,9 +272,7 @@
                     android:id="@+id/port4"
                     android:textStyle="bold"
                     android:textSize="22sp"
-                    android:paddingRight="20dp"
                     android:paddingEnd="20dp"
-                    android:paddingLeft="5dp"
                     android:paddingStart="5dp"
                     android:text="@string/row_port4"/>
 
@@ -309,9 +304,7 @@
                     android:id="@+id/port5"
                     android:textStyle="bold"
                     android:textSize="22sp"
-                    android:paddingRight="20dp"
                     android:paddingEnd="20dp"
-                    android:paddingLeft="5dp"
                     android:paddingStart="5dp"
                     android:text="@string/row_port5"/>
 

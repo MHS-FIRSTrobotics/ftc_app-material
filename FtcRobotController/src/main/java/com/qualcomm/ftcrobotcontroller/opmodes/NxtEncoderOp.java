@@ -35,7 +35,6 @@ import com.qualcomm.ftccommon.DbgLog;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
-import com.qualcomm.robotcore.hardware.Servo;
 
 /**
  * NxtEncoderOp
@@ -114,7 +113,7 @@ public class NxtEncoderOp extends OpMode {
 
     // The op mode should only use "write" methods (setPower, setChannelMode, etc) while in
     // WRITE_ONLY mode.
-    if (allowedToWrite()) {
+    if (IsAllowedToWrite()) {
       switch (state) {
 
         case STATE_ZERO:
@@ -128,8 +127,8 @@ public class NxtEncoderOp extends OpMode {
           break;
 
         case STATE_ONE:
-          if (bothEncodersZero() &&
-              motorsInCorrectMode(DcMotorController.RunMode.RUN_TO_POSITION)) {
+          if (AreBothEncodersZero() &&
+                  AreMotorsInCorrectMode(DcMotorController.RunMode.RUN_TO_POSITION)) {
             state = State.STATE_TWO;
           } else {
             motorLeft.setChannelMode(DcMotorController.RunMode.RUN_TO_POSITION);
@@ -150,8 +149,8 @@ public class NxtEncoderOp extends OpMode {
           break;
 
         case STATE_THREE:
-          if (withinMarginOfError(firstTarget, motorLeftCurrentEncoder) &&
-              withinMarginOfError(-firstTarget, motorRightCurrentEncoder)) {
+          if (IsWithinMarginofError(firstTarget, motorLeftCurrentEncoder) &&
+                  IsWithinMarginofError(-firstTarget, motorRightCurrentEncoder)) {
 
             motorLeft.setTargetPosition(secondTarget);
             motorRight.setTargetPosition(secondTarget);
@@ -222,28 +221,28 @@ public class NxtEncoderOp extends OpMode {
    */
   @Override
   public void stop() {
-    if (allowedToWrite()) {
+    if (IsAllowedToWrite()) {
       motorLeft.setChannelMode(DcMotorController.RunMode.RESET_ENCODERS);
       motorRight.setChannelMode(DcMotorController.RunMode.RESET_ENCODERS);
     }
 
   }
 
-  private boolean allowedToWrite(){
+  private boolean IsAllowedToWrite() {
     return (devMode == DcMotorController.DeviceMode.WRITE_ONLY);
   }
 
-  private boolean withinMarginOfError(int goal, int value) {
+  private boolean IsWithinMarginofError(int goal, int value) {
     int lowerMargin = goal - 2;
     int upperMargin = goal + 2;
     return (value >= lowerMargin && value <= upperMargin);
   }
 
-  private boolean bothEncodersZero() {
+  private boolean AreBothEncodersZero() {
     return motorRightCurrentEncoder == 0 && motorLeftCurrentEncoder == 0;
   }
 
-  private boolean motorsInCorrectMode(DcMotorController.RunMode runMode) {
+  private boolean AreMotorsInCorrectMode(DcMotorController.RunMode runMode) {
     return motorLeftRunMode == runMode && motorRightRunMode == runMode;
   }
 

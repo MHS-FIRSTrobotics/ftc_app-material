@@ -16,27 +16,26 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
-    <Button
+
+      <Button
+          android:id="@+id/servo_controller_cancelButton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="5dp"
+          android:text="@string/cancel"
+          android:onClick="cancelServoController"
+          android:layout_gravity="center_horizontal" />
+
+      <Button
       android:id="@+id/servo_controller_saveButton"
+          android:layout_toEndOf="@id/servo_controller_cancelButton"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginRight="5dp"
       android:layout_marginEnd="5dp"
       android:text="@string/done_button"
       android:onClick="saveServoController"
       android:layout_gravity="center_horizontal"/>
 
-    <Button
-      android:id="@+id/servo_controller_cancelButton"
-      android:layout_toRightOf="@id/servo_controller_saveButton"
-      android:layout_toEndOf="@id/servo_controller_saveButton"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginRight="5dp"
-      android:layout_marginEnd="5dp"
-      android:text="@string/cancel"
-      android:onClick="cancelServoController"
-      android:layout_gravity="center_horizontal"/>
 
   </RelativeLayout>
 
@@ -101,19 +100,21 @@
 
                 <TextView
                     android:id="@+id/port_title"
-                    android:paddingRight="20dp"
                     android:paddingEnd="20dp"
-                    android:paddingLeft="5dp"
                     android:paddingStart="5dp"
                     android:text="@string/port"
                     android:textStyle="bold"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/attached_title"
                     android:text="@string/attached"
                     android:textStyle="bold"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
 
             </TableRow>
@@ -121,31 +122,37 @@
             <!-- just draw a red line -->
             <View
                 android:layout_height="2dip"
-                android:background="#FF0000" />
-
+                android:background="#FF0000"
+                android:layout_width="match_parent" />
+        </TableLayout>
             <!-- ****************************************************** Servo 1 ******************************************************-->
-            <TableRow
-                android:id="@+id/row_port"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dip" >
+        <android.support.v7.widget.CardView
+            android:id="@+id/row_card1"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:id="@+id/row_card_layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/row_port1"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="22sp"
-                    android:paddingRight="20dp"
                     android:paddingEnd="20dp"
-                    android:paddingLeft="5dp"
-                    android:paddingStart="5dp"
-                    android:text="@string/row_port1"/>
+                    android:paddingStart="10dp"
+                    android:text="@string/row_port1" />
 
                 <CheckBox
                     android:id="@+id/checkbox_port1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginStart="30dp"/>
+                    android:layout_marginStart="30dp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -157,8 +164,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         android:maxLength="200"
-                        android:hint="@string/name_prompt_text">
-                    </EditText>
+                        android:hint="@string/name_prompt_text"></EditText>
 
                     <TextView
                         android:id="@+id/namePromptText_servo1"
@@ -166,34 +172,40 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/editTextResult_servo1"
-                        android:text="@string/servo_name_prompt">
-                    </TextView>
+                        android:text="@string/servo_name_prompt"></TextView>
                 </RelativeLayout>
-            </TableRow>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
-            <!-- ****************************************************** Servo 2 ******************************************************-->
-            <TableRow
-                android:id="@+id/row_port2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dip" >
+        <!-- ****************************************************** Servo 2 ******************************************************-->
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/row_port2"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:id="@+id/row_card_layout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/port2"
                     android:textStyle="bold"
                     android:textSize="22sp"
-                    android:paddingRight="20dp"
                     android:paddingEnd="20dp"
-                    android:paddingLeft="5dp"
                     android:paddingStart="5dp"
-                    android:text="@string/row_port2"/>
+                    android:text="@string/row_port2"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content" />
 
                 <CheckBox
                     android:id="@+id/checkbox_port2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginStart="30dp"/>
+                    android:layout_marginStart="30dp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -205,8 +217,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         android:maxLength="200"
-                        android:hint="@string/name_prompt_text">
-                    </EditText>
+                        android:hint="@string/name_prompt_text"></EditText>
 
                     <TextView
                         android:id="@+id/namePromptText_servo2"
@@ -214,33 +225,38 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/editTextResult_servo2"
-                        android:text="@string/servo_name_prompt">
-                    </TextView>
+                        android:text="@string/servo_name_prompt"></TextView>
                 </RelativeLayout>
-            </TableRow>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
-            <!-- ****************************************************** Servo 3 ******************************************************-->
-            <TableRow
-                android:id="@+id/row_port3"
-                android:layout_width="wrap_content"
+        <!-- ****************************************************** Servo 3 ******************************************************-->
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dip" >
+            android:id="@+id/row_port3"
+            android:layout_gravity="center"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:id="@+id/row_card_layout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/port3"
                     android:textStyle="bold"
                     android:textSize="22sp"
-                    android:paddingRight="20dp"
                     android:paddingEnd="20dp"
-                    android:paddingLeft="5dp"
                     android:paddingStart="5dp"
-                    android:text="@string/row_port3"/>
+                    android:text="@string/row_port3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <CheckBox
                     android:id="@+id/checkbox_port3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
                     android:layout_marginStart="30dp"/>
 
                 <RelativeLayout
@@ -265,30 +281,36 @@
                         android:text="@string/servo_name_prompt">
                     </TextView>
                 </RelativeLayout>
-            </TableRow>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
             <!-- ****************************************************** Servo 4 ******************************************************-->
-            <TableRow
+        <android.support.v7.widget.CardView
                 android:id="@+id/row_port4"
-                android:layout_width="wrap_content"
+            android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dip" >
+            android:layout_gravity="center"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:id="@+id/row_card_layout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/port4"
                     android:textStyle="bold"
                     android:textSize="22sp"
-                    android:paddingRight="20dp"
                     android:paddingEnd="20dp"
-                    android:paddingLeft="5dp"
                     android:paddingStart="5dp"
-                    android:text="@string/row_port4"/>
+                    android:text="@string/row_port4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <CheckBox
                     android:id="@+id/checkbox_port4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
                     android:layout_marginStart="30dp"/>
 
                 <RelativeLayout
@@ -313,31 +335,36 @@
                         android:text="@string/servo_name_prompt">
                     </TextView>
                 </RelativeLayout>
-            </TableRow>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
             <!-- ****************************************************** Servo 5 ******************************************************-->
-            <TableRow
+        <android.support.v7.widget.CardView
                 android:id="@+id/row_port5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dip" >
+            android:layout_gravity="center"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:id="@+id/row_card_layout5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/port5"
                     android:textStyle="bold"
                     android:textSize="22sp"
-                    android:paddingRight="20dp"
                     android:paddingEnd="20dp"
-                    android:paddingLeft="5dp"
                     android:paddingStart="5dp"
-                    android:text="@string/row_port5"/>
+                    android:text="@string/row_port5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <CheckBox
                     android:id="@+id/checkbox_port5"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginStart="30dp"/>
+                    android:layout_height="wrap_content" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -361,30 +388,36 @@
                         android:text="@string/servo_name_prompt">
                     </TextView>
                 </RelativeLayout>
-            </TableRow>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
             <!-- ****************************************************** Servo 6 ******************************************************-->
-            <TableRow
+        <android.support.v7.widget.CardView
                 android:id="@+id/row_port6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="6dip" >
+            android:layout_gravity="center"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:id="@+id/row_card_layout6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/port6"
                     android:textStyle="bold"
                     android:textSize="22sp"
-                    android:paddingRight="20dp"
                     android:paddingEnd="20dp"
-                    android:paddingLeft="5dp"
                     android:paddingStart="5dp"
-                    android:text="@string/row_port6"/>
+                    android:text="@string/row_port6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <CheckBox
                     android:id="@+id/checkbox_port6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
                     android:layout_marginStart="30dp"/>
 
                 <RelativeLayout
@@ -409,9 +442,8 @@
                         android:text="@string/servo_name_prompt">
                     </TextView>
                 </RelativeLayout>
-            </TableRow>
-
-        </TableLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
     </LinearLayout>
   </ScrollView>
 </LinearLayout>

@@ -61,7 +61,7 @@ import com.qualcomm.robotcore.util.SerialNumber;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class EditLegacyModuleControllerActivity extends Activity{
+public class EditLegacyModuleControllerActivity extends Activity {
 
   private Utility utility;
   private String activeFilename;
@@ -72,7 +72,7 @@ public class EditLegacyModuleControllerActivity extends Activity{
   public static final int EDIT_SERVO_CONTROLLER_REQUEST_CODE = 102;
   private LegacyModuleControllerConfiguration legacyModuleControllerConfiguration;
   private EditText controller_name;
-  private ArrayList<DeviceConfiguration> modules = new ArrayList<DeviceConfiguration>();
+  private ArrayList<DeviceConfiguration> modules = new ArrayList<>();
 
   private DeviceConfiguration module0;
   private View info_port0;
@@ -104,33 +104,33 @@ public class EditLegacyModuleControllerActivity extends Activity{
     super.onCreate(savedInstanceState);
     setContentView(R.layout.legacy);
 
-    LinearLayout layout_port0 = (LinearLayout) findViewById(R.id.linearLayout0);
-    info_port0 = getLayoutInflater().inflate(R.layout.legacy_module, layout_port0, true);
+    LinearLayout layoutPort0 = (LinearLayout) findViewById(R.id.linearLayout0);
+    info_port0 = getLayoutInflater().inflate(R.layout.legacy_module, layoutPort0, true);
     TextView port0 = (TextView) info_port0.findViewById(R.id.portNumber);
     port0.setText("0");
 
-    LinearLayout layout_port1 = (LinearLayout) findViewById(R.id.linearLayout1);
-    info_port1 = getLayoutInflater().inflate(R.layout.legacy_module, layout_port1, true);
+    LinearLayout layoutPort1 = (LinearLayout) findViewById(R.id.linearLayout1);
+    info_port1 = getLayoutInflater().inflate(R.layout.legacy_module, layoutPort1, true);
     TextView port1 = (TextView) info_port1.findViewById(R.id.portNumber);
     port1.setText("1");
 
-    LinearLayout layout_port2 = (LinearLayout) findViewById(R.id.linearLayout2);
-    info_port2 = getLayoutInflater().inflate(R.layout.legacy_module, layout_port2, true);
+    LinearLayout layoutPort2 = (LinearLayout) findViewById(R.id.linearLayout2);
+    info_port2 = getLayoutInflater().inflate(R.layout.legacy_module, layoutPort2, true);
     TextView port2 = (TextView) info_port2.findViewById(R.id.portNumber);
     port2.setText("2");
 
-    LinearLayout layout_port3 = (LinearLayout) findViewById(R.id.linearLayout3);
-    info_port3 = getLayoutInflater().inflate(R.layout.legacy_module, layout_port3, true);
+    LinearLayout layoutPort3 = (LinearLayout) findViewById(R.id.linearLayout3);
+    info_port3 = getLayoutInflater().inflate(R.layout.legacy_module, layoutPort3, true);
     TextView port3 = (TextView) info_port3.findViewById(R.id.portNumber);
     port3.setText("3");
 
-    LinearLayout layout_port4 = (LinearLayout) findViewById(R.id.linearLayout4);
-    info_port4 = getLayoutInflater().inflate(R.layout.legacy_module, layout_port4, true);
+    LinearLayout layoutPort4 = (LinearLayout) findViewById(R.id.linearLayout4);
+    info_port4 = getLayoutInflater().inflate(R.layout.legacy_module, layoutPort4, true);
     TextView port4 = (TextView) info_port4.findViewById(R.id.portNumber);
     port4.setText("4");
 
-    LinearLayout layout_port5 = (LinearLayout) findViewById(R.id.linearLayout5);
-    info_port5 = getLayoutInflater().inflate(R.layout.legacy_module, layout_port5, true);
+    LinearLayout layoutPort5 = (LinearLayout) findViewById(R.id.linearLayout5);
+    info_port5 = getLayoutInflater().inflate(R.layout.legacy_module, layoutPort5, true);
     TextView port5 = (TextView) info_port5.findViewById(R.id.portNumber);
     port5.setText("5");
 
@@ -208,7 +208,7 @@ public class EditLegacyModuleControllerActivity extends Activity{
 
   private void saveState(){
     Intent returnIntent = new Intent();
-    ArrayList<DeviceConfiguration> devices = new ArrayList<DeviceConfiguration>();
+    ArrayList<DeviceConfiguration> devices = new ArrayList<>();
 
     for (int i = 0; i <6; i++){
       View currentLayout = findViewByPort(i);
@@ -247,9 +247,9 @@ public class EditLegacyModuleControllerActivity extends Activity{
   private void populatePort(View v, DeviceConfiguration module){
 
     Spinner choiceSpinner = (Spinner) v.findViewById(R.id.choiceSpinner);
-    ArrayAdapter choice_adapter = (ArrayAdapter) choiceSpinner.getAdapter();
+    ArrayAdapter choiceAdapter = (ArrayAdapter) choiceSpinner.getAdapter();
 
-    int spinnerPosition = choice_adapter.getPosition(module.getType().toString());
+    int spinnerPosition = choiceAdapter.getPosition(module.getType().toString());
     choiceSpinner.setSelection(spinnerPosition);
     choiceSpinner.setOnItemSelectedListener(choiceListener);
 
@@ -320,7 +320,7 @@ public class EditLegacyModuleControllerActivity extends Activity{
     DeviceConfiguration currentModule = findModuleByPort(port);
 
     String name = currentModule.getName();
-    ArrayList<DeviceConfiguration> devices = new ArrayList<DeviceConfiguration>();
+    ArrayList<DeviceConfiguration> devices = new ArrayList<>();
     SerialNumber serialNumber = ControllerConfiguration.NO_SERIAL_NUMBER;
 
     DeviceConfiguration.ConfigurationType currentType = currentModule.getType();

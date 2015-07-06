@@ -158,18 +158,25 @@ public class FtcEventLoop implements EventLoop, BatteryChecker.BatteryWatcher {
     String name = command.getName();
     String extra = command.getExtra();
 
-    if (name.equals(CommandList.CMD_RESTART_ROBOT)) {
-      handleCommandRestartRobot();
-    } else if (name.equals(CommandList.CMD_REQUEST_OP_MODE_LIST)) {
-      handleCommandRequestOpModeList();
-    } else if (name.equals(CommandList.CMD_SWITCH_OP_MODE)) {
-      handleCommandSwitchOpMode(extra);
-    } else if (name.equals(CommandList.CMD_RESUME_OP_MODE)) {
-      handleResumeOpMode(extra);
-    } else if (name.equals(CommandList.CMD_CANCEL_RESUME)) {
-      handleCancelResume();
-    } else {
-      DbgLog.msg("Unknown command: " + name);
+    switch (name) {
+      case CommandList.CMD_RESTART_ROBOT:
+        handleCommandRestartRobot();
+        break;
+      case CommandList.CMD_REQUEST_OP_MODE_LIST:
+        handleCommandRequestOpModeList();
+        break;
+      case CommandList.CMD_SWITCH_OP_MODE:
+        handleCommandSwitchOpMode(extra);
+        break;
+      case CommandList.CMD_RESUME_OP_MODE:
+        handleResumeOpMode(extra);
+        break;
+      case CommandList.CMD_CANCEL_RESUME:
+        handleCancelResume();
+        break;
+      default:
+        DbgLog.msg("Unknown command: " + name);
+        break;
     }
   }
 
@@ -197,7 +204,7 @@ public class FtcEventLoop implements EventLoop, BatteryChecker.BatteryWatcher {
   private void handleCommandRequestOpModeList() {
     String opModeList = "";
     for (String opModeName : opModeManager.getOpModes()) {
-      if (opModeList.isEmpty() == false) opModeList += Util.ASCII_RECORD_SEPARATOR;
+      if (!opModeList.isEmpty()) opModeList += Util.ASCII_RECORD_SEPARATOR;
       opModeList += opModeName;
     }
     ftcEventLoopHandler.sendCommand(new Command(CommandList.CMD_REQUEST_OP_MODE_LIST_RESP, opModeList));

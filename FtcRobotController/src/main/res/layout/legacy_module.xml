@@ -11,7 +11,7 @@
 
             <TextView
                 android:id="@+id/portNumber"
-                android:textSize="12sp"
+                android:textSize="@dimen/abc_text_size_caption_material"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="@string/default_port"
@@ -19,28 +19,41 @@
 
 
             <!-- ****************************************************** Module ******************************************************-->
+            <android.support.v7.widget.CardView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="0dp">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/dropdown_layout">
+                <TextView
+                    android:id="@+id/titleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/abc_text_size_caption_material"
+                    android:padding="@dimen/padding_default"
+                    android:text="@string/titleText_view">
+                </TextView>
+
                 <Spinner
                     android:id="@+id/choiceSpinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@android:drawable/btn_dropdown"
+                    android:background="@android:drawable/editbox_dropdown_light_frame"
                     android:entries="@array/choice_array"
                     android:prompt="@string/choice_prompt"
-                    android:spinnerMode="dropdown" />
-                <TextView
-                    android:id="@+id/titleTextView"
-                    android:layout_below="@id/choiceSpinner"
-                    android:layout_marginBottom="30dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/titleText_view">
-                </TextView>
-            </RelativeLayout>
+                    android:spinnerMode="dropdown"
+                    android:layout_below="@id/titleTextView" />
 
+            </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/activity_vertical_margin">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -61,6 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/editTextResult_name"
+                    android:padding="@dimen/padding_default"
                     android:text="@string/name_prompt_undertext">
                 </TextView>
 
@@ -77,5 +91,6 @@
                     android:onClick="editController_portALL"
                     android:visibility="invisible"/>
             </RelativeLayout>
+            </android.support.v7.widget.CardView>
         </LinearLayout>
 </merge>

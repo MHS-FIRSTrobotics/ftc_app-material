@@ -66,9 +66,9 @@ public class AutoConfigureActivity extends Activity {
   private Context context;
   private Button configureButton;
   private DeviceManager deviceManager;
-  protected Map<SerialNumber, DeviceManager.DeviceType> scannedDevices = new HashMap<SerialNumber, DeviceManager.DeviceType>();
-  protected Set<Map.Entry<SerialNumber, DeviceManager.DeviceType>> entries = new HashSet<Map.Entry<SerialNumber, DeviceManager.DeviceType>>();
-  private Map<SerialNumber, ControllerConfiguration> deviceControllers = new HashMap<SerialNumber, ControllerConfiguration>();
+  protected Map<SerialNumber, DeviceManager.DeviceType> scannedDevices = new HashMap<>();
+  protected Set<Map.Entry<SerialNumber, DeviceManager.DeviceType>> entries = new HashSet<>();
+  private Map<SerialNumber, ControllerConfiguration> deviceControllers = new HashMap<>();
 
   private Thread t;
   private Utility utility;
@@ -127,10 +127,10 @@ public class AutoConfigureActivity extends Activity {
                   warnIfNoDevices();
                 }
                 entries = scannedDevices.entrySet();
-                deviceControllers = new HashMap<SerialNumber, ControllerConfiguration>();
+                deviceControllers = new HashMap<>();
 
                 utility.createLists(entries, deviceControllers);
-                boolean foundRightDevices = buildK9();
+                boolean foundRightDevices = IsBuildK9Ready();
                 if (foundRightDevices) {
                   writeFile();
                 } else {
@@ -157,11 +157,9 @@ public class AutoConfigureActivity extends Activity {
     } catch (RobotCoreException e) {
       utility.complainToast(e.getMessage(), context);
       DbgLog.error(e.getMessage());
-      return;
     } catch (IOException e){
       utility.complainToast("Found " + e.getMessage() + "\n Please fix and re-save", context);
       DbgLog.error(e.getMessage());
-      return;
   }
   }
 
@@ -176,7 +174,7 @@ public class AutoConfigureActivity extends Activity {
           "      c. IR seeker in port 2\n" +
           "      d. Light sensor in port 3 \n" +
           "   2. Press the AutoConfigure button";
-    utility.setOrangeText(msg0, msg1, R.id.autoconfigure_info, R.layout.orange_warning, R.id.orangetext0, R.id.orangetext1);
+    utility.setOrangeText(msg0, msg1, R.id.autoconfigure_info, R.layout.orange_warning, R.id.orangeText0, R.id.orangeText1);
   }
 
   private void warnWrongDevices(){
@@ -190,17 +188,17 @@ public class AutoConfigureActivity extends Activity {
         "          servo in port 1 and port 6 \n"+
         "       c. IR seeker in port 2\n" +
         "       d. Light sensor in port 3 ";
-    utility.setOrangeText(msg0, msg1, R.id.autoconfigure_info, R.layout.orange_warning, R.id.orangetext0, R.id.orangetext1);
+    utility.setOrangeText(msg0, msg1, R.id.autoconfigure_info, R.layout.orange_warning, R.id.orangeText0, R.id.orangeText1);
   }
 
   private void warnAlreadyConfigured(){
     String msg0 = "Already configured!";
     String msg1 = "To configure again, \n press the AutoConfigure button";
-    utility.setOrangeText(msg0, msg1, R.id.autoconfigure_info, R.layout.orange_warning, R.id.orangetext0, R.id.orangetext1);
+    utility.setOrangeText(msg0, msg1, R.id.autoconfigure_info, R.layout.orange_warning, R.id.orangeText0, R.id.orangeText1);
   }
 
   // returns true if the right devices have been found and constructed
-  private boolean buildK9(){
+  private boolean IsBuildK9Ready() {
     boolean needLegacyController = true;
     for (Map.Entry entry : entries){
       DeviceManager.DeviceType type = (DeviceManager.DeviceType) entry.getValue();
@@ -212,8 +210,8 @@ public class AutoConfigureActivity extends Activity {
     if (needLegacyController){
       return false;
     }
-    LinearLayout autoconfigure_info = (LinearLayout) findViewById(R.id.autoconfigure_info);
-    autoconfigure_info.removeAllViews();
+    LinearLayout autoconfigureInfo = (LinearLayout) findViewById(R.id.autoconfigure_info);
+    autoconfigureInfo.removeAllViews();
     return true;
   }
 
@@ -226,7 +224,7 @@ public class AutoConfigureActivity extends Activity {
     motorController.setName("Legacy Motor Controller");
 
     //port 1
-    ArrayList<String> servoNames = new ArrayList<String>();
+    ArrayList<String> servoNames = new ArrayList<>();
     servoNames.add("servo_1");
     servoNames.add(ControllerConfiguration.DISABLED_DEVICE_NAME);
     servoNames.add(ControllerConfiguration.DISABLED_DEVICE_NAME);
@@ -238,20 +236,20 @@ public class AutoConfigureActivity extends Activity {
     servoController.setName("Legacy Servo Controller");
 
     //port 2
-    DeviceConfiguration ir_seeker = new DeviceConfiguration(DeviceConfiguration.ConfigurationType.IR_SEEKER);
-    ir_seeker.setName("ir_seeker");
-    ir_seeker.setPort(2);
+    DeviceConfiguration irSeeker = new DeviceConfiguration(DeviceConfiguration.ConfigurationType.IR_SEEKER);
+    irSeeker.setName("ir_seeker");
+    irSeeker.setPort(2);
 
     //port 3
-    DeviceConfiguration light_sensor = new DeviceConfiguration(DeviceConfiguration.ConfigurationType.LIGHT_SENSOR);
-    light_sensor.setName("light_sensor");
-    ir_seeker.setPort(3);
+    DeviceConfiguration lightSensor = new DeviceConfiguration(DeviceConfiguration.ConfigurationType.LIGHT_SENSOR);
+    lightSensor.setName("light_sensor");
+    irSeeker.setPort(3);
 
     ArrayList<DeviceConfiguration> devices = new ArrayList<DeviceConfiguration>();
     devices.add(motorController);
     devices.add(servoController);
-    devices.add(ir_seeker);
-    devices.add(light_sensor);
+    devices.add(irSeeker);
+    devices.add(lightSensor);
     for (int i = 4; i < 6; i++){
       DeviceConfiguration nothing = new DeviceConfiguration(i);
       devices.add(nothing);
@@ -286,7 +284,7 @@ public class AutoConfigureActivity extends Activity {
     } else {
       servoController = new ServoControllerConfiguration();
     }
-    ArrayList<DeviceConfiguration> servos = new ArrayList<DeviceConfiguration>();
+    ArrayList<DeviceConfiguration> servos = new ArrayList<>();
     for (int i = 1; i <= 6; i++){
       ServoConfiguration servo = new ServoConfiguration(names.get(i-1));
       servo.setPort(i);

@@ -109,7 +109,7 @@ public class NxtTeleOp extends OpMode {
 
     // The op mode should only use "write" methods (setPower, setChannelMode, etc) while in
     // WRITE_ONLY mode or SWITCHING_TO_WRITE_MODE
-    if (allowedToWrite()) {
+    if (IsAllowedToWrite()) {
     /*
      * Gamepad 1
      *
@@ -178,7 +178,7 @@ public class NxtTeleOp extends OpMode {
 
       // we only want to process gamepad2 if someone is using one of it's analog inputs. If you always
       // want to process gamepad2, remove this check
-      if (gamepad2.atRest() == false) {
+      if (!gamepad2.atRest()) {
 
         // throttle is taken directly from the right trigger, the right trigger ranges in values from
         // 0 to 1
@@ -257,7 +257,7 @@ public class NxtTeleOp extends OpMode {
   }
 
   // If the device is in either of these two modes, the op mode is allowed to write to the HW.
-  private boolean allowedToWrite(){
+  private boolean IsAllowedToWrite() {
     return (devMode == DcMotorController.DeviceMode.WRITE_ONLY);
   }
 

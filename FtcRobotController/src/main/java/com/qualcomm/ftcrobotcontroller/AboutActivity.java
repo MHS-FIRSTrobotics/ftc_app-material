@@ -39,6 +39,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.qualcomm.ftccommon.DbgLog;
 import com.qualcomm.robotcore.util.Version;
 
 /**
@@ -95,6 +96,7 @@ public class AboutActivity extends Activity
                     .getPackageInfo(AboutActivity.this.getPackageName(), 0).versionName;
               }
               catch( android.content.pm.PackageManager.NameNotFoundException e ) {
+                DbgLog.logStacktrace(e);
               }
             }
             else if( pos == 1 ) {

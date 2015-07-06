@@ -30,16 +30,12 @@
       android:minWidth="0dp"
       android:text="@string/autoconfigure" />
 
-    <TextView
-      android:id="@+id/configureButton_text"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/autoconfigureButton_text"/>
+
     <!-- red line -->
     <View
       android:layout_width="match_parent"
-      android:layout_height="2dip"
-      android:background="#FF0000" />
+        android:layout_height="1dp"
+        android:background="@color/red" />
 
     <LinearLayout
       android:id="@+id/autoconfigure_info"

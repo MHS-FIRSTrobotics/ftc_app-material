@@ -48,13 +48,13 @@ import com.qualcomm.robotcore.util.RobotLog;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class EditMotorControllerActivity extends Activity{
+public class EditMotorControllerActivity extends Activity {
 
   private Utility utility;
   public static final String EDIT_MOTOR_CONTROLLER_CONFIG = "EDIT_MOTOR_CONTROLLER_CONFIG";
 
   private MotorControllerConfiguration motorControllerConfigurationConfig;
-  private ArrayList<DeviceConfiguration> motors = new ArrayList<DeviceConfiguration>();
+  private ArrayList<DeviceConfiguration> motors = new ArrayList<>();
   private MotorConfiguration motor1 = new MotorConfiguration(1);
   private MotorConfiguration motor2 = new MotorConfiguration(2);
 
@@ -171,7 +171,7 @@ public class EditMotorControllerActivity extends Activity{
   private void saveState(){
 
     Intent returnIntent = new Intent();
-    ArrayList<DeviceConfiguration> motors = new ArrayList<DeviceConfiguration>();
+    ArrayList<DeviceConfiguration> motors = new ArrayList<>();
     if (motor1Enabled){
       String name = motor1_name.getText().toString();
       MotorConfiguration newMotor = new MotorConfiguration(name);

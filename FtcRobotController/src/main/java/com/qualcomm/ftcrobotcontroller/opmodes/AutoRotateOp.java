@@ -85,7 +85,7 @@ public class AutoRotateOp extends OpMode {
       double facing = compass.getDirection();
 
       // have we reached our goal direction?
-      if (hasReachedDegree(GOALS[currentGoal], facing) == false) {
+      if (!hasReachedDegree(GOALS[currentGoal], facing)) {
         // no, move toward our goal
         DbgLog.msg("moving from " + facing + " toward " + GOALS[currentGoal]);
 

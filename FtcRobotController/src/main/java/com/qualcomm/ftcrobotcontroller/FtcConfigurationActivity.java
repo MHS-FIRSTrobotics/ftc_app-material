@@ -82,13 +82,13 @@ public class FtcConfigurationActivity extends Activity{
 
   private Thread t;
 
-  private Map<SerialNumber, ControllerConfiguration> deviceControllers = new HashMap<SerialNumber, ControllerConfiguration>();
+  private Map<SerialNumber, ControllerConfiguration> deviceControllers = new HashMap<>();
   private Context context;
   private DeviceManager deviceManager;
   private Button scanButton;
   private String preferredFilename = Utility.NO_FILE;
-  protected Map<SerialNumber, DeviceType> scannedDevices = new HashMap<SerialNumber, DeviceType>();
-  protected Set<Entry<SerialNumber, DeviceType>> entries = new HashSet<Entry<SerialNumber, DeviceType>>();
+  protected Map<SerialNumber, DeviceType> scannedDevices = new HashMap<>();
+  protected Set<Entry<SerialNumber, DeviceType>> entries = new HashSet<>();
   protected SharedPreferences preferences;
   private Utility utility;
 
@@ -200,7 +200,7 @@ public class FtcConfigurationActivity extends Activity{
           entries = scannedDevices.entrySet();
 
           //if you just scanned, wipe out the previous devices
-          deviceControllers = new HashMap<SerialNumber, ControllerConfiguration>();
+            deviceControllers = new HashMap<>();
           utility.createLists(entries, deviceControllers);
           populateList();
           warnIfNoDevices();
@@ -222,13 +222,13 @@ public class FtcConfigurationActivity extends Activity{
       input.setText("");
       AlertDialog.Builder builder = utility.buildBuilder("Unsaved changes", message);
       builder.setView(input);
-      DialogInterface.OnClickListener ok_listener = new DialogInterface.OnClickListener(){
+      DialogInterface.OnClickListener okListener = new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int button){
           t.start();
         }
       };
 
-      builder.setPositiveButton("Ok", ok_listener);
+      builder.setPositiveButton("Ok", okListener);
       builder.setNegativeButton("Cancel", do_nothing_cancel_listener);
       builder.show();
     } else {
@@ -271,25 +271,25 @@ public class FtcConfigurationActivity extends Activity{
       String msg1 = "In order to find devices: \n" +
           "    1. Attach a robot \n " +
           "   2. Press the 'Scan' button";
-      utility.setOrangeText(msg0, msg1, R.id.empty_devicelist, R.layout.orange_warning, R.id.orangetext0, R.id.orangetext1);
+      utility.setOrangeText(msg0, msg1, R.id.empty_deviceList, R.layout.orange_warning, R.id.orangeText0, R.id.orangeText1);
       clearDuplicateWarning();
     } else {
-      LinearLayout empty_devicelist = (LinearLayout) findViewById(R.id.empty_devicelist);
-      empty_devicelist.removeAllViews();
-      empty_devicelist.setVisibility(View.GONE);
+      LinearLayout emptyDeviceList = (LinearLayout) findViewById(R.id.empty_deviceList);
+      emptyDeviceList.removeAllViews();
+      emptyDeviceList.setVisibility(View.GONE);
     }
   }
 
   private void warnDuplicateNames(String dupeMsg){
     String msg0 ="Found " + dupeMsg;
     String msg1 = "Please fix and re-save.";
-    utility.setOrangeText(msg0, msg1, R.id.warning_layout, R.layout.orange_warning, R.id.orangetext0, R.id.orangetext1);
+    utility.setOrangeText(msg0, msg1, R.id.warning_layout, R.layout.orange_warning, R.id.orangeText0, R.id.orangeText1);
   }
 
   private void clearDuplicateWarning(){
-    LinearLayout warning_layout = (LinearLayout) findViewById(R.id.warning_layout);
-    warning_layout.removeAllViews();
-    warning_layout.setVisibility(View.GONE);
+    LinearLayout warningLayout = (LinearLayout) findViewById(R.id.warning_layout);
+    warningLayout.removeAllViews();
+    warningLayout.setVisibility(View.GONE);
   }
 
 
@@ -402,7 +402,7 @@ public class FtcConfigurationActivity extends Activity{
       input.setText(currentFile);
       AlertDialog.Builder builder = utility.buildBuilder("Unsaved changes", message);
       builder.setView(input);
-      DialogInterface.OnClickListener ok_listener = new DialogInterface.OnClickListener(){
+      DialogInterface.OnClickListener okListener = new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int button){
           String filename = input.getText().toString()+Utility.FILE_EXT;
           filename = filename.trim();
@@ -430,8 +430,8 @@ public class FtcConfigurationActivity extends Activity{
         }
       };
 
-      builder.setPositiveButton("Ok", ok_listener);
-      builder.setNegativeButton("Cancel", back_cancel_listener);
+      builder.setPositiveButton("Ok", okListener);
+      builder.setNegativeButton("Cancel", backCancelListener);
       builder.show();
     } else {
       super.onBackPressed();
@@ -442,7 +442,7 @@ public class FtcConfigurationActivity extends Activity{
    * The cancel listener that changes the filename and ends the activity, like one would
    * expect the back button to do.
    */
-  DialogInterface.OnClickListener back_cancel_listener = new DialogInterface.OnClickListener(){
+  DialogInterface.OnClickListener backCancelListener = new DialogInterface.OnClickListener() {
     public void onClick(DialogInterface dialog, int button){
       // Set preferredFilename to unchanged file that was there previously
       utility.saveToPreferences(preferredFilename.substring(7).trim(), R.string.pref_hardware_config_filename); // chop off "Unsaved"
@@ -470,7 +470,7 @@ public class FtcConfigurationActivity extends Activity{
     input.setText(currentFile);
     AlertDialog.Builder builder = utility.buildBuilder("Enter file name", message);
     builder.setView(input);
-    DialogInterface.OnClickListener ok_listener = new DialogInterface.OnClickListener(){
+    DialogInterface.OnClickListener okListener = new DialogInterface.OnClickListener() {
       public void onClick(DialogInterface dialog, int button){
         String filename = input.getText().toString()+Utility.FILE_EXT;
         filename = filename.trim();
@@ -498,7 +498,7 @@ public class FtcConfigurationActivity extends Activity{
       }
     };
 
-    builder.setPositiveButton("Ok", ok_listener);
+    builder.setPositiveButton("Ok", okListener);
     builder.setNegativeButton("Cancel", do_nothing_cancel_listener);
     builder.show();
   }
@@ -518,7 +518,7 @@ public class FtcConfigurationActivity extends Activity{
    * @param deviceList a list of devices
    */
   private void buildHashMap(ArrayList<ControllerConfiguration> deviceList){
-    deviceControllers = new HashMap<SerialNumber, ControllerConfiguration>();
+    deviceControllers = new HashMap<>();
 
     for (ControllerConfiguration controller : deviceList){
       deviceControllers.put(controller.getSerialNumber(), controller);

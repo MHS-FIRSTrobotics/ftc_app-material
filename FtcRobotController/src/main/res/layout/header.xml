@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/header"
+    android:id="@+id/configHeader"
     android:layout_alignParentTop="true"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
-    android:paddingTop="2dp"
-    android:paddingBottom="2dp"
-    android:background="@color/light_qcom_blue"
+    android:paddingTop="3dp"
+    android:paddingBottom="3dp"
+    android:background="@color/light_accent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
+
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Active Configuration File:"
+        android:text="@string/active_config_file"
         android:layout_weight="1"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -25,5 +26,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+
 
 </LinearLayout>

@@ -52,7 +52,7 @@ import java.util.ArrayList;
 
 public class FtcLoadFileActivity extends Activity {
 
-  private ArrayList<String> fileList = new ArrayList<String>();
+  private ArrayList<String> fileList = new ArrayList<>();
   private Context context;
   private Utility utility;
 
@@ -124,11 +124,11 @@ public class FtcLoadFileActivity extends Activity {
     if (fileList.size() == 0) {
       String msg0 = "No files found!";
       String msg1 = "In order to proceed, you must create a new file";
-      utility.setOrangeText(msg0, msg1, R.id.empty_filelist, R.layout.orange_warning, R.id.orangetext0, R.id.orangetext1);
+      utility.setOrangeText(msg0, msg1, R.id.empty_filelist, R.layout.orange_warning, R.id.orangeText0, R.id.orangeText1);
     } else {
-      ViewGroup empty_filelist = (ViewGroup) findViewById(R.id.empty_filelist);
-      empty_filelist.removeAllViews();
-      empty_filelist.setVisibility(View.GONE);
+      ViewGroup emptyFilelist = (ViewGroup) findViewById(R.id.empty_filelist);
+      emptyFilelist.removeAllViews();
+      emptyFilelist.setVisibility(View.GONE);
     }
   }
 
@@ -136,7 +136,7 @@ public class FtcLoadFileActivity extends Activity {
     ViewGroup inclusionViewGroup = (ViewGroup)findViewById(R.id.inclusionlayout);
     inclusionViewGroup.removeAllViews();
     for (String filename: fileList){
-      View child = LayoutInflater.from(this).inflate(R.layout.file_info, null);
+      View child = LayoutInflater.from(this).inflate(R.layout.file_info, inclusionViewGroup, false);
       inclusionViewGroup.addView(child);
       TextView name = (TextView) child.findViewById(R.id.filename_editText);
       name.setText(filename);

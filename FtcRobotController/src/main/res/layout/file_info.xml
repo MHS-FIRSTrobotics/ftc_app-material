@@ -40,13 +40,14 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:orientation="horizontal"
+            style="?android:attr/buttonBarStyle"
           >
           <Button
             android:id="@+id/file_edit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="3dp"
             android:layout_marginEnd="3dp"
+              style="?android:attr/buttonBarButtonStyle"
             android:textSize="16sp"
             android:text="@string/file_edit_button"
             android:onClick="file_edit_button"/>
@@ -55,20 +56,20 @@
             android:id="@+id/file_activate_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="3dp"
             android:layout_marginEnd="3dp"
             android:textSize="16sp"
             android:text="@string/file_activate_button"
+              style="?android:attr/buttonBarButtonStyle"
             android:onClick="file_activate_button"/>
 
           <Button
             android:id="@+id/file_delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="3dp"
             android:layout_marginEnd="3dp"
             android:textSize="16sp"
             android:text="@string/file_delete_button"
+              style="?android:attr/buttonBarButtonStyle"
             android:onClick="file_delete_button"/>
         </LinearLayout>
       </LinearLayout>

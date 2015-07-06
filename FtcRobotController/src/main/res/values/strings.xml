@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="app_name">FTC Robot Controller</string>
+  <string name="app_name">Robot Controller</string>
   <string name="ok">OK</string>
 
   <!-- Wifi Channel Selector -->
@@ -132,5 +132,12 @@
 
   <!-- Preferences -->
   <string name="pref_launch_settings">pref_launch_settings</string>
+  <string name="devices">Devices:</string>
+  <string name="new_button">New</string>
+  <string name="create_config_file">Click here to create a new configuration file</string>
+  <string name="available_files">Available files:</string>
+  <string name="device_name">Device Name:</string>
+  <string name="active_config_file">Active Configuration File:</string>
+  <string name="info">i</string>
 
 </resources>

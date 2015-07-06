@@ -20,23 +20,31 @@
       android:layout_height="match_parent"
       android:orientation="vertical">
 
-      <Button
-        android:id="@+id/scanButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:text="@string/scan" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-      <TextView
-        android:id="@+id/scanButton_text"
-        android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/scanButton_text"/>
+            <Button
+                android:id="@+id/scanButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:text="@string/scan" />
 
-      <LinearLayout
+            <include
+                layout="@layout/info_button"
+                android:id="@+id/devices_scan_info_btn"
+                android:onClick="devices_scan_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+        </RelativeLayout>
+
+        <LinearLayout
         android:id="@+id/warning_layout"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
@@ -47,50 +55,62 @@
       <View
         android:layout_width="match_parent"
         android:layout_height="2dip"
-        android:background="#FF0000" />
+          android:background="@color/red" />
 
-      <RelativeLayout
-        android:id="@+id/devices_holder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
 
-        <TextView
-          android:text="Devices:"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textStyle="bold"
-          android:textSize="16sp"/>
+            <RelativeLayout
+                android:id="@+id/devices_holder"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:padding="5dp"
+                android:orientation="horizontal">
 
-        <include
-          layout="@layout/info_button"
-          android:id="@+id/devices_info_btn"
-          android:onClick="devices_info"/>
+                <TextView
+                    android:id="@+id/devices"
+                    android:text="@string/devices"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:textStyle="bold"
+                    android:textSize="18sp" />
 
-      </RelativeLayout>
+                <include
+                    layout="@layout/info_button"
+                    android:id="@+id/devices_info_btn"
+                    android:onClick="devices_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-      <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
-        <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:orientation="vertical">
-          <ListView
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="45dp">
+
+                <ListView
             android:id="@+id/controllersList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-          <LinearLayout
-            android:id="@+id/empty_devicelist"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:id="@+id/empty_deviceList"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="center"/>
+                    android:layout_gravity="center">
+
+                </LinearLayout>
 
 
         </LinearLayout>
-      </ScrollView>
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 
   <LinearLayout
@@ -108,37 +128,31 @@
     <View
       android:layout_width="match_parent"
       android:layout_height="2dip"
-      android:background="#FF0000" />
+        android:background="@color/red" />
 
     <RelativeLayout
       android:id="@+id/save_holder"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="horizontal">
-    <Button
-      android:id="@+id/writeXML"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:onClick="saveConfiguration"
-      android:textSize="12sp"
-      android:minHeight="0dp"
-      android:minWidth="0dp"
-      android:text="@string/save_configuration" />
 
-    <include
-      layout="@layout/info_button"
-      android:id="@+id/save_config_btn"
-      android:layout_width="60dp"
-      android:layout_height="60dp"
-      android:onClick="save_config"/>
+        <Button
+            android:id="@+id/writeXML"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="saveConfiguration"
+            android:textSize="12sp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:text="@string/save_configuration" />
+
+        <include
+            layout="@layout/info_button"
+            android:id="@+id/save_config_btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:onClick="save_config" />
     </RelativeLayout>
-
-    <TextView
-      android:id="@+id/writeXML_text"
-      android:layout_marginBottom="5dp"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/writeXML_text"/>
   </LinearLayout>
 
 </RelativeLayout>

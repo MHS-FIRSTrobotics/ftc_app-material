@@ -296,7 +296,7 @@ public class EditServoControllerActivity extends Activity{
 
   private void saveState(){
     Intent returnIntent = new Intent();
-    ArrayList<DeviceConfiguration> servos = new ArrayList<DeviceConfiguration>();
+    ArrayList<DeviceConfiguration> servos = new ArrayList<>();
     if (servo1Enabled){
       String name = name_servo1.getText().toString();
       ServoConfiguration servo1 = new ServoConfiguration(name);
