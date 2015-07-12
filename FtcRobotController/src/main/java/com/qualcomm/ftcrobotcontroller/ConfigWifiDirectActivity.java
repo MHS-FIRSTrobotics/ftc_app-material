@@ -45,56 +45,56 @@ import com.qualcomm.robotcore.wifi.FixWifiDirectSetup;
  */
 public class ConfigWifiDirectActivity extends Activity {
 
-  private ProgressDialog progressDialog;
-  private Context context;
+    private ProgressDialog progressDialog;
+    private Context context;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_config_wifi_direct);
-
-    context = this;
-  }
-
-  @Override
-  protected void onResume() {
-    super.onResume();
-
-    (new Thread(new ToggleWifiRunnable())).start();
-  }
-
-  /*
-   * This runnable toggles wifi off and on, which is the only reliable way to fix a misconfigured
-   * wifi direct connection.
-   */
-  private class ToggleWifiRunnable implements Runnable {
     @Override
-    public void run() {
-      DbgLog.msg("attempting to reconfigure Wifi Direct");
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_config_wifi_direct);
 
-      runOnUiThread(new Runnable() {
-        @Override
-        public void run() {
-          progressDialog = ProgressDialog.show(context, "Configuring Wifi Direct", "Please Wait", true);
-        }
-      });
-
-      WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-
-      try {
-        FixWifiDirectSetup.fixWifiDirectSetup(wifiManager);
-      } catch (InterruptedException e) {
-        DbgLog.msg("Cannot fix wifi setup - interrupted");
-      }
-
-      runOnUiThread(new Runnable() {
-        @Override
-        public void run() {
-          progressDialog.dismiss();
-          finish();
-        }
-      });
-
+        context = this;
     }
-  }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        (new Thread(new ToggleWifiRunnable())).start();
+    }
+
+    /*
+     * This runnable toggles wifi off and on, which is the only reliable way to fix a misconfigured
+     * wifi direct connection.
+     */
+    private class ToggleWifiRunnable implements Runnable {
+        @Override
+        public void run() {
+            DbgLog.msg("attempting to reconfigure Wifi Direct");
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    progressDialog = ProgressDialog.show(context, "Configuring Wifi Direct", "Please Wait", true);
+                }
+            });
+
+            WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+
+            try {
+                FixWifiDirectSetup.fixWifiDirectSetup(wifiManager);
+            } catch (InterruptedException e) {
+                DbgLog.msg("Cannot fix wifi setup - interrupted");
+            }
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    progressDialog.dismiss();
+                    finish();
+                }
+            });
+
+        }
+    }
 }

@@ -50,182 +50,185 @@ import com.qualcomm.robotcore.util.Util;
 
 /**
  * Main event loop to control our demo robot
- * <p>
+ * <p/>
  * Modify this class with your own code, or create your own event loop by
  * implementing EventLoop.
  */
 public class FtcEventLoop implements EventLoop, BatteryChecker.BatteryWatcher {
 
-  FtcEventLoopHandler ftcEventLoopHandler;
+    FtcEventLoopHandler ftcEventLoopHandler;
 
-  OpModeManager opModeManager = new OpModeManager(new HardwareMap());
+    OpModeManager opModeManager = new OpModeManager(new HardwareMap());
 
-  public FtcEventLoop(HardwareFactory hardwareFactory, UpdateUI.Callback callback) {
-    this.ftcEventLoopHandler = new FtcEventLoopHandler(hardwareFactory, callback);
-  }
-
-  public OpModeManager getOpModeManager() {
-    return opModeManager;
-  }
-
-  /**
-   * Init method
-   * <p>
-   * This code will run when the robot first starts up. Place any initialization code in this
-   * method.
-   * <p>
-   * It is important to save a copy of the event loop manager from this method, as that is how
-   * you'll get access to the gamepad.
-   * <p>
-   * If an Exception is thrown then the event loop manager will not start the robot.
-   * <p>
-   * @see com.qualcomm.robotcore.eventloop.EventLoop#init(com.qualcomm.robotcore.eventloop.EventLoopManager)
-   */
-  @Override
-  public void init(EventLoopManager eventLoopManager) throws RobotCoreException, InterruptedException {
-    DbgLog.msg("======= INIT START =======");
-
-    opModeManager.registerOpModes(new FtcOpModeRegister());
-
-    ftcEventLoopHandler.init(eventLoopManager);
-
-    HardwareMap hardwareMap = ftcEventLoopHandler.getHardwareMap();
-
-    // Start up the op mode manager
-    opModeManager.setHardwareMap(hardwareMap);
-
-    DbgLog.msg("======= INIT FINISH =======");
-  }
-
-  /**
-   * Loop method, this will be called repeatedly while the robot is running.
-   * <p>
-   * @see com.qualcomm.robotcore.eventloop.EventLoop#loop()
-   */
-  @Override
-  public void loop() throws RobotCoreException {
-
-    ftcEventLoopHandler.displayGamePadInfo(opModeManager.getActiveOpModeName());
-    Gamepad gamepads[] = ftcEventLoopHandler.getGamepads();
-
-    opModeManager.runActiveOpMode(gamepads);
-
-    // send telemetry data
-    ftcEventLoopHandler.sendTelemetryData(opModeManager.getActiveOpMode().telemetry);
-
-  }
-
-  /**
-   * Teardown method
-   * <p>
-   * This method will be called when the robot is being shut down. This method should stop the robot. There will be no more changes to write
-   * to the hardware after this method is called.
-   * <p>
-   * If an exception is thrown, then the event loop manager will attempt to shut down the robot
-   * without the benefit of this method.
-   * <p>
-   * @see com.qualcomm.robotcore.eventloop.EventLoop#teardown()
-   */
-  @Override
-  public void teardown() throws RobotCoreException {
-    DbgLog.msg("======= TEARDOWN =======");
-
-    // stop the op mode
-    opModeManager.stopActiveOpMode();
-
-    // power down and close the DC motor controllers
-    ftcEventLoopHandler.shutdownMotorControllers();
-
-    // power down and close the servo controllers
-    ftcEventLoopHandler.shutdownServoControllers();
-
-    // power down and close the legacy modules
-    // this should be after the servo and motor controllers, since some of them
-    // may be connected through this device
-    ftcEventLoopHandler.shutdownLegacyModules();
-
-    DbgLog.msg("======= TEARDOWN COMPLETE =======");
-  }
-
-  /**
-   * If the driver station sends over a command, it will be routed to this method. You can choose
-   * what to do with this command, or you can just ignore it completely.
-   */
-  @Override
-  public void processCommand(Command command) {
-    DbgLog.msg("Processing Command: " + command.getName() + " " + command.getExtra());
-
-    String name = command.getName();
-    String extra = command.getExtra();
-
-    switch (name) {
-      case CommandList.CMD_RESTART_ROBOT:
-        handleCommandRestartRobot();
-        break;
-      case CommandList.CMD_REQUEST_OP_MODE_LIST:
-        handleCommandRequestOpModeList();
-        break;
-      case CommandList.CMD_SWITCH_OP_MODE:
-        handleCommandSwitchOpMode(extra);
-        break;
-      case CommandList.CMD_RESUME_OP_MODE:
-        handleResumeOpMode(extra);
-        break;
-      case CommandList.CMD_CANCEL_RESUME:
-        handleCancelResume();
-        break;
-      default:
-        DbgLog.msg("Unknown command: " + name);
-        break;
+    public FtcEventLoop(HardwareFactory hardwareFactory, UpdateUI.Callback callback) {
+        this.ftcEventLoopHandler = new FtcEventLoopHandler(hardwareFactory, callback);
     }
-  }
 
-  private void handleCancelResume() {
-    if (ftcEventLoopHandler.waitingForRestart()) {
-      opModeManager.cancelResume();
-      ftcEventLoopHandler.finishRestart(OpModeManager.DEFAULT_OP_MODE_NAME);
+    public OpModeManager getOpModeManager() {
+        return opModeManager;
     }
-  }
 
-  private void handleResumeOpMode(String extra) {
-    if (ftcEventLoopHandler.waitingForRestart()) {
-      opModeManager.resumeOpMode();
-      ftcEventLoopHandler.finishRestart(extra);
+    /**
+     * Init method
+     * <p/>
+     * This code will run when the robot first starts up. Place any initialization code in this
+     * method.
+     * <p/>
+     * It is important to save a copy of the event loop manager from this method, as that is how
+     * you'll get access to the gamepad.
+     * <p/>
+     * If an Exception is thrown then the event loop manager will not start the robot.
+     * <p/>
+     *
+     * @see com.qualcomm.robotcore.eventloop.EventLoop#init(com.qualcomm.robotcore.eventloop.EventLoopManager)
+     */
+    @Override
+    public void init(EventLoopManager eventLoopManager) throws RobotCoreException, InterruptedException {
+        DbgLog.msg("======= INIT START =======");
 
-      //send response
-      ftcEventLoopHandler.sendCommand(new Command(CommandList.CMD_RESUME_OP_MODE_RESP, opModeManager.getActiveOpModeName()));
+        opModeManager.registerOpModes(new FtcOpModeRegister());
+
+        ftcEventLoopHandler.init(eventLoopManager);
+
+        HardwareMap hardwareMap = ftcEventLoopHandler.getHardwareMap();
+
+        // Start up the op mode manager
+        opModeManager.setHardwareMap(hardwareMap);
+
+        DbgLog.msg("======= INIT FINISH =======");
     }
-  }
 
-  private void handleCommandRestartRobot() {
-    ftcEventLoopHandler.restartRobot();
-  }
+    /**
+     * Loop method, this will be called repeatedly while the robot is running.
+     * <p/>
+     *
+     * @see com.qualcomm.robotcore.eventloop.EventLoop#loop()
+     */
+    @Override
+    public void loop() throws RobotCoreException {
 
-  private void handleCommandRequestOpModeList() {
-    String opModeList = "";
-    for (String opModeName : opModeManager.getOpModes()) {
-      if (!opModeList.isEmpty()) opModeList += Util.ASCII_RECORD_SEPARATOR;
-      opModeList += opModeName;
+        ftcEventLoopHandler.displayGamePadInfo(opModeManager.getActiveOpModeName());
+        Gamepad gamepads[] = ftcEventLoopHandler.getGamepads();
+
+        opModeManager.runActiveOpMode(gamepads);
+
+        // send telemetry data
+        ftcEventLoopHandler.sendTelemetryData(opModeManager.getActiveOpMode().telemetry);
+
     }
-    ftcEventLoopHandler.sendCommand(new Command(CommandList.CMD_REQUEST_OP_MODE_LIST_RESP, opModeList));
-  }
 
-  private void handleCommandSwitchOpMode(String extra) {
+    /**
+     * Teardown method
+     * <p/>
+     * This method will be called when the robot is being shut down. This method should stop the robot. There will be no more changes to write
+     * to the hardware after this method is called.
+     * <p/>
+     * If an exception is thrown, then the event loop manager will attempt to shut down the robot
+     * without the benefit of this method.
+     * <p/>
+     *
+     * @see com.qualcomm.robotcore.eventloop.EventLoop#teardown()
+     */
+    @Override
+    public void teardown() throws RobotCoreException {
+        DbgLog.msg("======= TEARDOWN =======");
 
-    // if the event loop isn't running, switch to stop op
-    String newOpMode = ftcEventLoopHandler.getOpMode(extra);
+        // stop the op mode
+        opModeManager.stopActiveOpMode();
 
-    opModeManager.switchOpModes(newOpMode);
+        // power down and close the DC motor controllers
+        ftcEventLoopHandler.shutdownMotorControllers();
 
-    RobotLog.clearGlobalErrorMsg();
+        // power down and close the servo controllers
+        ftcEventLoopHandler.shutdownServoControllers();
 
-    //send response
-    ftcEventLoopHandler.sendCommand(new Command(CommandList.CMD_SWITCH_OP_MODE_RESP, opModeManager.getActiveOpModeName()));
-  }
+        // power down and close the legacy modules
+        // this should be after the servo and motor controllers, since some of them
+        // may be connected through this device
+        ftcEventLoopHandler.shutdownLegacyModules();
 
-  public void updateBatteryLevel(float percent) {
-    ftcEventLoopHandler.sendTelemetry(EventLoopManager.RC_BATTERY_LEVEL_KEY, "RobotController battery level: " + percent + "%");
-  }
+        DbgLog.msg("======= TEARDOWN COMPLETE =======");
+    }
+
+    /**
+     * If the driver station sends over a command, it will be routed to this method. You can choose
+     * what to do with this command, or you can just ignore it completely.
+     */
+    @Override
+    public void processCommand(Command command) {
+        DbgLog.msg("Processing Command: " + command.getName() + " " + command.getExtra());
+
+        String name = command.getName();
+        String extra = command.getExtra();
+
+        switch (name) {
+            case CommandList.CMD_RESTART_ROBOT:
+                handleCommandRestartRobot();
+                break;
+            case CommandList.CMD_REQUEST_OP_MODE_LIST:
+                handleCommandRequestOpModeList();
+                break;
+            case CommandList.CMD_SWITCH_OP_MODE:
+                handleCommandSwitchOpMode(extra);
+                break;
+            case CommandList.CMD_RESUME_OP_MODE:
+                handleResumeOpMode(extra);
+                break;
+            case CommandList.CMD_CANCEL_RESUME:
+                handleCancelResume();
+                break;
+            default:
+                DbgLog.msg("Unknown command: " + name);
+                break;
+        }
+    }
+
+    private void handleCancelResume() {
+        if (ftcEventLoopHandler.waitingForRestart()) {
+            opModeManager.cancelResume();
+            ftcEventLoopHandler.finishRestart(OpModeManager.DEFAULT_OP_MODE_NAME);
+        }
+    }
+
+    private void handleResumeOpMode(String extra) {
+        if (ftcEventLoopHandler.waitingForRestart()) {
+            opModeManager.resumeOpMode();
+            ftcEventLoopHandler.finishRestart(extra);
+
+            //send response
+            ftcEventLoopHandler.sendCommand(new Command(CommandList.CMD_RESUME_OP_MODE_RESP, opModeManager.getActiveOpModeName()));
+        }
+    }
+
+    private void handleCommandRestartRobot() {
+        ftcEventLoopHandler.restartRobot();
+    }
+
+    private void handleCommandRequestOpModeList() {
+        String opModeList = "";
+        for (String opModeName : opModeManager.getOpModes()) {
+            if (!opModeList.isEmpty()) opModeList += Util.ASCII_RECORD_SEPARATOR;
+            opModeList += opModeName;
+        }
+        ftcEventLoopHandler.sendCommand(new Command(CommandList.CMD_REQUEST_OP_MODE_LIST_RESP, opModeList));
+    }
+
+    private void handleCommandSwitchOpMode(String extra) {
+
+        // if the event loop isn't running, switch to stop op
+        String newOpMode = ftcEventLoopHandler.getOpMode(extra);
+
+        opModeManager.switchOpModes(newOpMode);
+
+        RobotLog.clearGlobalErrorMsg();
+
+        //send response
+        ftcEventLoopHandler.sendCommand(new Command(CommandList.CMD_SWITCH_OP_MODE_RESP, opModeManager.getActiveOpModeName()));
+    }
+
+    public void updateBatteryLevel(float percent) {
+        ftcEventLoopHandler.sendTelemetry(EventLoopManager.RC_BATTERY_LEVEL_KEY, "RobotController battery level: " + percent + "%");
+    }
 
 
 }

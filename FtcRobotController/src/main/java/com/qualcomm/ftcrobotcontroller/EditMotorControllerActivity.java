@@ -50,157 +50,161 @@ import java.util.ArrayList;
 
 public class EditMotorControllerActivity extends Activity {
 
-  private Utility utility;
-  public static final String EDIT_MOTOR_CONTROLLER_CONFIG = "EDIT_MOTOR_CONTROLLER_CONFIG";
+    public static final String EDIT_MOTOR_CONTROLLER_CONFIG = "EDIT_MOTOR_CONTROLLER_CONFIG";
+    private Utility utility;
+    private MotorControllerConfiguration motorControllerConfigurationConfig;
+    private ArrayList<DeviceConfiguration> motors = new ArrayList<>();
+    private MotorConfiguration motor1 = new MotorConfiguration(1);
+    private MotorConfiguration motor2 = new MotorConfiguration(2);
 
-  private MotorControllerConfiguration motorControllerConfigurationConfig;
-  private ArrayList<DeviceConfiguration> motors = new ArrayList<>();
-  private MotorConfiguration motor1 = new MotorConfiguration(1);
-  private MotorConfiguration motor2 = new MotorConfiguration(2);
+    private EditText controller_name;
 
-  private EditText controller_name;
+    private boolean motor1Enabled = true;
+    private boolean motor2Enabled = true;
 
-  private boolean motor1Enabled = true;
-  private boolean motor2Enabled = true;
+    private CheckBox checkbox_motor1;
+    private CheckBox checkbox_motor2;
 
-  private CheckBox checkbox_motor1;
-  private CheckBox checkbox_motor2;
+    private EditText motor1_name;
+    private EditText motor2_name;
 
-  private EditText motor1_name;
-  private EditText motor2_name;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.motors);
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState){
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.motors);
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        utility = new Utility(this);
 
-    PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-    utility = new Utility(this);
+        RobotLog.writeLogcatToDisk(this, 1024);
 
-    RobotLog.writeLogcatToDisk(this, 1024);
+        controller_name = (EditText) findViewById(R.id.controller_name);
+        checkbox_motor1 = (CheckBox) findViewById(R.id.checkbox_port1);
+        checkbox_motor2 = (CheckBox) findViewById(R.id.checkbox_port2);
+        motor1_name = (EditText) findViewById(R.id.editTextResult_motor1);
+        motor2_name = (EditText) findViewById(R.id.editTextResult_motor2);
 
-    controller_name = (EditText) findViewById(R.id.controller_name);
-    checkbox_motor1 = (CheckBox) findViewById(R.id.checkbox_port1);
-    checkbox_motor2 = (CheckBox) findViewById(R.id.checkbox_port2);
-    motor1_name = (EditText) findViewById(R.id.editTextResult_motor1);
-    motor2_name = (EditText) findViewById(R.id.editTextResult_motor2);
-
-  }
-
-  @Override
-  protected void onStart(){
-    super.onStart();
-
-    utility.updateHeader(Utility.NO_FILE, R.string.pref_hardware_config_filename, R.id.active_filename, R.id.included_header);
-    Intent intent = getIntent();
-    Serializable extra = intent.getSerializableExtra(EDIT_MOTOR_CONTROLLER_CONFIG);
-
-    if(extra != null) {
-      motorControllerConfigurationConfig = (MotorControllerConfiguration) extra;
-      motors = (ArrayList<DeviceConfiguration>) motorControllerConfigurationConfig.getMotors();
-      motor1 = (MotorConfiguration) motors.get(0);
-      motor2 = (MotorConfiguration) motors.get(1);
-
-      controller_name.setText(motorControllerConfigurationConfig.getName());
-
-      motor1_name.setText(motor1.getName());
-      motor2_name.setText(motor2.getName());
-
-      addListenerOnPort1();
-      handleDisabledMotor(motor1, checkbox_motor1);
-      addListenerOnPort2();
-      handleDisabledMotor(motor2, checkbox_motor2);
     }
-  }
-  private void handleDisabledMotor(MotorConfiguration motor, CheckBox checkbox){
-    if (motor.getName().equals(DeviceConfiguration.DISABLED_DEVICE_NAME) ||
-            motor.getType() == DeviceConfiguration.ConfigurationType.NOTHING){
-      checkbox.setChecked(true); // kind of a hack. Sets the checkbox to true, so
-                                // when performing the click programmatically,
-                               // the checkbox becomes "unclicked" which does the right thing.
-      checkbox.performClick();
-    } else {
-      checkbox.setChecked(true);
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        utility.updateHeader(Utility.NO_FILE, R.string.pref_hardware_config_filename, R.id.active_filename, R.id.included_header);
+        Intent intent = getIntent();
+        Serializable extra = intent.getSerializableExtra(EDIT_MOTOR_CONTROLLER_CONFIG);
+
+        if (extra != null) {
+            motorControllerConfigurationConfig = (MotorControllerConfiguration) extra;
+            motors = (ArrayList<DeviceConfiguration>) motorControllerConfigurationConfig.getMotors();
+            motor1 = (MotorConfiguration) motors.get(0);
+            motor2 = (MotorConfiguration) motors.get(1);
+
+            controller_name.setText(motorControllerConfigurationConfig.getName());
+
+            motor1_name.setText(motor1.getName());
+            motor2_name.setText(motor2.getName());
+
+            addListenerOnPort1();
+            handleDisabledMotor(motor1, checkbox_motor1);
+            addListenerOnPort2();
+            handleDisabledMotor(motor2, checkbox_motor2);
+        }
     }
-  }
 
-  private void addListenerOnPort1(){
-    checkbox_motor1.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        if (((CheckBox)view).isChecked()){
-          motor1Enabled = true;
-          motor1_name.setEnabled(true);
-          motor1_name.setText("");
-          motor1.setPort(1);
-          motor1.setType(DeviceConfiguration.ConfigurationType.MOTOR);
+    private void handleDisabledMotor(MotorConfiguration motor, CheckBox checkbox) {
+        if (motor.getName().equals(DeviceConfiguration.DISABLED_DEVICE_NAME) ||
+                motor.getType() == DeviceConfiguration.ConfigurationType.NOTHING) {
+            checkbox.setChecked(true); // kind of a hack. Sets the checkbox to true, so
+            // when performing the click programmatically,
+            // the checkbox becomes "unclicked" which does the right thing.
+            checkbox.performClick();
         } else {
-          motor1Enabled = false;
-          motor1_name.setEnabled(false);
-          motor1_name.setText(DeviceConfiguration.DISABLED_DEVICE_NAME);
-          motor1.setType(DeviceConfiguration.ConfigurationType.NOTHING);
+            checkbox.setChecked(true);
         }
-      }
-    });
-  }
+    }
 
-  private void addListenerOnPort2(){
-    checkbox_motor2.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        if (((CheckBox)view).isChecked()){
-          motor2Enabled = true;
-          motor2_name.setEnabled(true);
-          motor2_name.setText("");
-          motor2.setPort(2);
-          motor1.setType(DeviceConfiguration.ConfigurationType.MOTOR);
+    private void addListenerOnPort1() {
+        checkbox_motor1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (((CheckBox) view).isChecked()) {
+                    motor1Enabled = true;
+                    motor1_name.setEnabled(true);
+                    motor1_name.setText("");
+                    motor1.setPort(1);
+                    motor1.setType(DeviceConfiguration.ConfigurationType.MOTOR);
+                } else {
+                    motor1Enabled = false;
+                    motor1_name.setEnabled(false);
+                    motor1_name.setText(DeviceConfiguration.DISABLED_DEVICE_NAME);
+                    motor1.setType(DeviceConfiguration.ConfigurationType.NOTHING);
+                }
+            }
+        });
+    }
+
+    private void addListenerOnPort2() {
+        checkbox_motor2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (((CheckBox) view).isChecked()) {
+                    motor2Enabled = true;
+                    motor2_name.setEnabled(true);
+                    motor2_name.setText("");
+                    motor2.setPort(2);
+                    motor1.setType(DeviceConfiguration.ConfigurationType.MOTOR);
+                } else {
+                    motor2Enabled = false;
+                    motor2_name.setEnabled(false);
+                    motor2_name.setText(DeviceConfiguration.DISABLED_DEVICE_NAME);
+                    motor1.setType(DeviceConfiguration.ConfigurationType.NOTHING);
+                }
+            }
+        });
+    }
+
+    public void saveMotorController(View v) {
+        saveState();
+    }
+
+    private void saveState() {
+
+        Intent returnIntent = new Intent();
+        ArrayList<DeviceConfiguration> motors = new ArrayList<>();
+        if (motor1Enabled) {
+            String name = motor1_name.getText().toString();
+            MotorConfiguration newMotor = new MotorConfiguration(name);
+            newMotor.setDisabled(false);
+            newMotor.setPort(1);
+            motors.add(newMotor);
         } else {
-          motor2Enabled = false;
-          motor2_name.setEnabled(false);
-          motor2_name.setText(DeviceConfiguration.DISABLED_DEVICE_NAME);
-          motor1.setType(DeviceConfiguration.ConfigurationType.NOTHING);
-        }
-      }
-    });
-  }
+            motors.add(new MotorConfiguration(1));
+        } // add disabled motor
 
-  public void saveMotorController(View v){
-    saveState();
-  }
+        if (motor2Enabled) {
+            String name = motor2_name.getText().toString();
+            MotorConfiguration newMotor = new MotorConfiguration(name);
+            newMotor.setDisabled(false);
+            newMotor.setPort(2);
+            motors.add(newMotor);
+        } else {
+            motors.add(new MotorConfiguration(2));
+        } // add disabled motor
 
-  private void saveState(){
+        motorControllerConfigurationConfig.addMotors(motors);
+        motorControllerConfigurationConfig.setName(controller_name.getText().toString());
+        returnIntent.putExtra(EDIT_MOTOR_CONTROLLER_CONFIG, motorControllerConfigurationConfig);
 
-    Intent returnIntent = new Intent();
-    ArrayList<DeviceConfiguration> motors = new ArrayList<>();
-    if (motor1Enabled){
-      String name = motor1_name.getText().toString();
-      MotorConfiguration newMotor = new MotorConfiguration(name);
-      newMotor.setDisabled(false);
-      newMotor.setPort(1);
-      motors.add(newMotor);
-    } else { motors.add(new MotorConfiguration(1)); } // add disabled motor
+        setResult(RESULT_OK, returnIntent);
+        finish();
 
-    if (motor2Enabled){
-      String name = motor2_name.getText().toString();
-      MotorConfiguration newMotor = new MotorConfiguration(name);
-      newMotor.setDisabled(false);
-      newMotor.setPort(2);
-      motors.add(newMotor);
-    } else { motors.add(new MotorConfiguration(2)); } // add disabled motor
+    }
 
-    motorControllerConfigurationConfig.addMotors(motors);
-    motorControllerConfigurationConfig.setName(controller_name.getText().toString());
-    returnIntent.putExtra(EDIT_MOTOR_CONTROLLER_CONFIG, motorControllerConfigurationConfig);
-
-    setResult(RESULT_OK, returnIntent);
-    finish();
-
-  }
-
-  public void cancelMotorController(View v){
-    setResult(RESULT_CANCELED, new Intent());
-    finish();
-  }
+    public void cancelMotorController(View v) {
+        setResult(RESULT_CANCELED, new Intent());
+        finish();
+    }
 
 
 }

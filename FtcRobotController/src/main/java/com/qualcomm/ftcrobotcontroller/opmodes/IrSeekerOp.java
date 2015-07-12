@@ -37,7 +37,7 @@ import com.qualcomm.robotcore.hardware.IrSeekerSensor;
 
 /**
  * Follow an IR Beacon
- * <p>
+ * <p/>
  * How to use: <br>
  * Make sure the Modern Robotics IR beacon is off. <br>
  * Set it to 1200 at 180.  <br>
@@ -47,67 +47,67 @@ import com.qualcomm.robotcore.hardware.IrSeekerSensor;
  */
 public class IrSeekerOp extends OpMode {
 
-  final static double MOTOR_POWER = 0.15; // Higher values will cause the robot to move faster
+    final static double MOTOR_POWER = 0.15; // Higher values will cause the robot to move faster
 
-  final static double HOLD_IR_SIGNAL_STRENGTH = 0.20; // Higher values will cause the robot to follow closer
+    final static double HOLD_IR_SIGNAL_STRENGTH = 0.20; // Higher values will cause the robot to follow closer
 
-  IrSeekerSensor irSeeker;
-  DcMotor motorRight;
-  DcMotor motorLeft;
+    IrSeekerSensor irSeeker;
+    DcMotor motorRight;
+    DcMotor motorLeft;
 
-  public IrSeekerOp() {
+    public IrSeekerOp() {
 
-  }
-
-  @Override
-  public void start() {
-    irSeeker = hardwareMap.irSeekerSensor.get("ir_seeker");
-    motorRight = hardwareMap.dcMotor.get("motor_2");
-    motorLeft = hardwareMap.dcMotor.get("motor_1");
-
-    motorLeft.setDirection(DcMotor.Direction.REVERSE);
-  }
-
-  @Override
-  public void loop() {
-
-    // Is an IR signal detected?
-    if (irSeeker.signalDetected()) {
-      // an IR signal is detected
-
-      // Get the angle and strength of the signal
-      double angle = irSeeker.getAngle();
-      double strength = irSeeker.getStrength();
-
-      // which direction should we move?
-      if (angle < 0) {
-        // we need to move to the left
-        motorRight.setPower(MOTOR_POWER);
-        motorLeft.setPower(-MOTOR_POWER);
-      } else if (angle > 0) {
-        // we need to move to the right
-        motorRight.setPower(-MOTOR_POWER);
-        motorLeft.setPower(MOTOR_POWER);
-      } else if (strength < HOLD_IR_SIGNAL_STRENGTH) {
-        // the IR signal is weak, approach
-        motorRight.setPower(MOTOR_POWER);
-        motorLeft.setPower(MOTOR_POWER);
-      } else {
-        // the IR signal is strong, stay here
-        motorRight.setPower(0.0);
-        motorLeft.setPower(0.0);
-      }
-    } else {
-      // no IR signal is detected
-      motorRight.setPower(0.0);
-      motorLeft.setPower(0.0);
     }
 
-    DbgLog.msg(irSeeker.toString());
-  }
+    @Override
+    public void start() {
+        irSeeker = hardwareMap.irSeekerSensor.get("ir_seeker");
+        motorRight = hardwareMap.dcMotor.get("motor_2");
+        motorLeft = hardwareMap.dcMotor.get("motor_1");
 
-  @Override
-  public void stop() {
-    // no action needed
-  }
+        motorLeft.setDirection(DcMotor.Direction.REVERSE);
+    }
+
+    @Override
+    public void loop() {
+
+        // Is an IR signal detected?
+        if (irSeeker.signalDetected()) {
+            // an IR signal is detected
+
+            // Get the angle and strength of the signal
+            double angle = irSeeker.getAngle();
+            double strength = irSeeker.getStrength();
+
+            // which direction should we move?
+            if (angle < 0) {
+                // we need to move to the left
+                motorRight.setPower(MOTOR_POWER);
+                motorLeft.setPower(-MOTOR_POWER);
+            } else if (angle > 0) {
+                // we need to move to the right
+                motorRight.setPower(-MOTOR_POWER);
+                motorLeft.setPower(MOTOR_POWER);
+            } else if (strength < HOLD_IR_SIGNAL_STRENGTH) {
+                // the IR signal is weak, approach
+                motorRight.setPower(MOTOR_POWER);
+                motorLeft.setPower(MOTOR_POWER);
+            } else {
+                // the IR signal is strong, stay here
+                motorRight.setPower(0.0);
+                motorLeft.setPower(0.0);
+            }
+        } else {
+            // no IR signal is detected
+            motorRight.setPower(0.0);
+            motorLeft.setPower(0.0);
+        }
+
+        DbgLog.msg(irSeeker.toString());
+    }
+
+    @Override
+    public void stop() {
+        // no action needed
+    }
 }
