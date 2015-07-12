@@ -2,9 +2,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes.autonomous;
 
 import com.qualcomm.robotcore.util.RobotLog;
 
-/**
- * Created by David on 7/9/2015.
- */
+
 public class Autonomous implements Runnable {
     public RobotState roboState;
     private RunLevel[] levels;
@@ -91,6 +89,14 @@ public class Autonomous implements Runnable {
         SetRunLevels(newLevels);
     }
 
+    public void RunInitLevel() {
+        RunLevel(initLevel);
+    }
+
+    public void RunFinishLevel() {
+        RunLevel(stopLevel);
+    }
+
     public synchronized void SetInitState(int level) {
         if (levels != null) {
             throw new IllegalStateException("All states are null.");
@@ -131,9 +137,8 @@ public class Autonomous implements Runnable {
         if (isValidLevelNum(level)) {
             return -1;
         }
-        //Set the default to negative five
-        int execReturn = -5;
 
+        int execReturn;
         try {
             execReturn = levels[level].execute();
         } catch (Exception ex) {

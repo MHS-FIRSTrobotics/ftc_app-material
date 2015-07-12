@@ -1,9 +1,9 @@
 package com.qualcomm.ftcrobotcontroller.opmodes.autonomous;
 
-/**
- * Created by David on 7/9/2015.
- */
-public abstract class AutoMode {
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+
+
+public abstract class AutoMode extends OpMode {
     public Autonomous auto;
     public RobotState state;
     private Thread autoThread;
@@ -19,7 +19,7 @@ public abstract class AutoMode {
     }
 
     public void init() {
-        auto.start();
+        auto.RunInitLevel();
     }
 
     public void run() {
@@ -30,7 +30,7 @@ public abstract class AutoMode {
     }
 
     public void done() {
-        auto.RunLevel(0);
+        auto.RunFinishLevel();
         auto.close();
     }
 

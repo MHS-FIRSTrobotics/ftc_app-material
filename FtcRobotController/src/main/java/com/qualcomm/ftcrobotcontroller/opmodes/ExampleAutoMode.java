@@ -41,7 +41,7 @@ public class ExampleAutoMode extends AutoMode {
 
         // Build the autonomous object
         auto = new Autonomous(levels, state);
-         
+
         /* Optional
         // Set the states to their defaults
         runner.SetInitState(0);
@@ -53,14 +53,14 @@ public class ExampleAutoMode extends AutoMode {
     }
 
     @Override
-    public void init() {
+    public void start() {
         super.init();
         //TODO: write your init here
     }
 
 
     @Override
-    public void run() {
+    public void loop() {
         //This runs the main Autonomous thread and specifies the default behavior
         super.run();
 
@@ -69,7 +69,7 @@ public class ExampleAutoMode extends AutoMode {
 
     //Runs when the OpMode finishes
     @Override
-    public void done() {
+    public void stop() {
         super.done();
 
     }
