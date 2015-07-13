@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/shape"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:shape="rectangle">
+
+    <stroke
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="2dp"
+        android:color="#FF6700" />
+
+    <solid
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:color="#FF9000" />
+
+    <corners
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:bottomLeftRadius="5dp"
+        android:bottomRightRadius="5dp"
+        android:topLeftRadius="5dp"
+        android:topRightRadius="5dp" />
+
+</shape><!-- From: file:/F:/Users/David/Documents/Robotics/SDK/ftc_app/FtcRobotController/src/main/res/drawable-mdpi/shape.xml -->

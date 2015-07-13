@@ -1,0 +1,34 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="99"
+        android:title="@string/settings_menu_item"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_restart_robot"
+        android:orderInCategory="100"
+        android:title="@string/restart_robot_menu_item"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_view_logs"
+        android:orderInCategory="101"
+        android:title="@string/view_logs_menu_item"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_about"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:orderInCategory="999"
+        android:title="@string/about_menu_item" />
+
+    <item
+        android:id="@+id/action_exit_app"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:orderInCategory="1000"
+        android:title="@string/action_exit_app" />
+
+</menu>
+<!-- From: file:/F:/Users/David/Documents/Robotics/SDK/ftc_app/FtcRobotController/src/main/res/menu/ftc_robot_controller.xml -->

@@ -1,0 +1,334 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".EditLegacyModuleControllerActivity">
+
+    <include
+        android:id="@+id/included_header"
+        layout="@layout/header" />
+
+    <!-- ****************************************************** buttons ******************************************************************* -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <Button
+            android:id="@+id/legacy_controller_cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:onClick="cancelLegacyController"
+            android:text="@string/cancel" />
+
+        <Button
+            android:id="@+id/legacy_controller_saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@+id/legacy_controller_cancelButton"
+            android:onClick="saveLegacyController"
+            android:text="@string/done_button" />
+
+
+    </RelativeLayout>
+
+    <!-- just draw a grey line -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dip"
+        android:background="@android:color/darker_gray" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:keepScreenOn="true"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            tools:context=".EditLegacyModuleControllerActivity">
+
+            <EditText
+                android:id="@+id/legacycontroller_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/name_prompt_text"
+                android:inputType="text"
+                android:maxLength="200"
+                android:text="@string/servo_controller_name"
+                android:textSize="18sp"
+                android:textStyle="bold"></EditText>
+
+            <TextView
+                android:id="@+id/controller_name_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="@string/legacy_controller_name"></TextView>
+
+            <!-- just draw a red line -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:background="#FF0000" />
+
+
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/tableLayout_servocontroller"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:shrinkColumns="0"
+                android:stretchColumns="1">
+
+                <!-- 2 columns -->
+                <TableRow
+                    android:id="@+id/table_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dip">
+
+                    <TextView
+                        android:id="@+id/port_title"
+                        android:paddingEnd="20dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="20dp"
+                        android:paddingStart="5dp"
+                        android:text="@string/port"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/attached_title"
+                        android:text="@string/device_info"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+
+                </TableRow>
+                <!-- red line -->
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF0000" />
+
+                <!-- ****************************************************** Port 0 ******************************************************-->
+                <TableRow
+                    android:id="@+id/row_port0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dip">
+
+                    <TextView
+                        android:id="@+id/port0"
+                        android:paddingEnd="20dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="20dp"
+                        android:paddingStart="5dp"
+                        android:text="@string/row_port0"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout0"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical"></LinearLayout>
+                    </RelativeLayout>
+                </TableRow>
+
+                <!-- red line -->
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF0000" />
+
+
+                <!-- ****************************************************** Port 1 ******************************************************-->
+                <TableRow
+                    android:id="@+id/row_port1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dip">
+
+                    <TextView
+                        android:id="@+id/port1"
+                        android:paddingEnd="20dp"
+                        android:paddingStart="5dp"
+                        android:text="@string/row_port1"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical"></LinearLayout>
+                    </RelativeLayout>
+                </TableRow>
+
+                <!-- red line -->
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF0000" />
+
+                <!-- ****************************************************** Port 2 ******************************************************-->
+                <TableRow
+                    android:id="@+id/row_port2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dip">
+
+                    <TextView
+                        android:id="@+id/port2"
+                        android:paddingEnd="20dp"
+                        android:paddingStart="5dp"
+                        android:text="@string/row_port2"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical"></LinearLayout>
+                    </RelativeLayout>
+                </TableRow>
+
+                <!-- red line -->
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF0000" />
+
+
+                <!-- ****************************************************** Port 3 ******************************************************-->
+                <TableRow
+                    android:id="@+id/row_port3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dip">
+
+                    <TextView
+                        android:id="@+id/port3"
+                        android:paddingEnd="20dp"
+                        android:paddingStart="5dp"
+
+                        android:text="@string/row_port3"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical"></LinearLayout>
+                    </RelativeLayout>
+                </TableRow>
+
+                <!-- red line -->
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF0000" />
+
+                <!-- ****************************************************** Port 4 ******************************************************-->
+                <TableRow
+                    android:id="@+id/row_port4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dip">
+
+                    <TextView
+                        android:id="@+id/port4"
+                        android:paddingEnd="20dp"
+                        android:paddingStart="5dp"
+                        android:text="@string/row_port4"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical"></LinearLayout>
+                    </RelativeLayout>
+                </TableRow>
+
+                <!-- red line -->
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF0000" />
+
+                <!-- ****************************************************** Port 5 ******************************************************-->
+                <TableRow
+                    android:id="@+id/row_port5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dip">
+
+                    <TextView
+                        android:id="@+id/port5"
+                        android:paddingEnd="20dp"
+                        android:paddingStart="5dp"
+                        android:text="@string/row_port5"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical"></LinearLayout>
+                    </RelativeLayout>
+                </TableRow>
+
+                <!-- red line -->
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF0000" />
+
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout><!-- From: file:/F:/Users/David/Documents/Robotics/SDK/ftc_app/FtcRobotController/src/main/res/layout/legacy.xml -->

@@ -44,53 +44,53 @@ import com.qualcomm.ftccommon.Device;
 
 public class SettingsActivity extends Activity {
 
-  public static class SettingsFragment extends PreferenceFragment {
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-      super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-      // Load the preferences from an XML resource
-      addPreferencesFromResource(R.xml.preferences);
-
-
-      if (Build.MANUFACTURER.equalsIgnoreCase(Device.MANUFACTURER_ZTE) && Build.MODEL.equalsIgnoreCase(Device.MODEL_ZTE_SPEED)) {
-        Preference launchSettings =  findPreference(getString(R.string.pref_launch_settings));
-        launchSettings.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-          public boolean onPreferenceClick(Preference preference) {
-            Intent intent = getActivity().getPackageManager().getLaunchIntentForPackage("com.zte.wifichanneleditor");
-            try {
-              startActivity(intent);
-            } catch (NullPointerException e) {
-              Toast.makeText(getActivity(), "Unable to launch ZTE WifiChannelEditor", Toast.LENGTH_SHORT).show();
-            }
-            return true;
-          }
-        });
-      }
-
-      if (Build.MODEL.equals(Device.MODEL_FOXDA_FL7007)) {
-        Preference launchSettings =  findPreference(getString(R.string.pref_launch_settings));
-        launchSettings.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-          public boolean onPreferenceClick(Preference preference) {
-            Intent viewIntent = new Intent(Settings.ACTION_SETTINGS);
-            startActivity(viewIntent);
-
-            return true;
-          }
-        });
-      }
+        // Display the fragment as the main content.
+        getFragmentManager().beginTransaction()
+                .replace(android.R.id.content, new SettingsFragment())
+                .commit();
     }
-  }
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+    public static class SettingsFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
 
-    // Display the fragment as the main content.
-    getFragmentManager().beginTransaction()
-    .replace(android.R.id.content, new SettingsFragment())
-    .commit();
-  }
+            // Load the preferences from an XML resource
+            addPreferencesFromResource(R.xml.preferences);
+
+
+            if (Build.MANUFACTURER.equalsIgnoreCase(Device.MANUFACTURER_ZTE) && Build.MODEL.equalsIgnoreCase(Device.MODEL_ZTE_SPEED)) {
+                Preference launchSettings = findPreference(getString(R.string.pref_launch_settings));
+                launchSettings.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+                    public boolean onPreferenceClick(Preference preference) {
+                        Intent intent = getActivity().getPackageManager().getLaunchIntentForPackage("com.zte.wifichanneleditor");
+                        try {
+                            startActivity(intent);
+                        } catch (NullPointerException e) {
+                            Toast.makeText(getActivity(), "Unable to launch ZTE WifiChannelEditor", Toast.LENGTH_SHORT).show();
+                        }
+                        return true;
+                    }
+                });
+            }
+
+            if (Build.MODEL.equals(Device.MODEL_FOXDA_FL7007)) {
+                Preference launchSettings = findPreference(getString(R.string.pref_launch_settings));
+                launchSettings.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+                    public boolean onPreferenceClick(Preference preference) {
+                        Intent viewIntent = new Intent(Settings.ACTION_SETTINGS);
+                        startActivity(viewIntent);
+
+                        return true;
+                    }
+                });
+            }
+        }
+    }
 }

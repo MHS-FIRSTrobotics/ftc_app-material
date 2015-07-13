@@ -39,13 +39,13 @@ import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
  */
 public class FtcOpModeRegister implements OpModeRegister {
 
-  /**
-   * The Op Mode Manager will call this method when it wants a list of all
-   * available op modes. Add your op mode to the list to enable it.
-   *
-   * @param manager op mode manager
-   */
-  public void register(OpModeManager manager) {
+    /**
+     * The Op Mode Manager will call this method when it wants a list of all
+     * available op modes. Add your op mode to the list to enable it.
+     *
+     * @param manager op mode manager
+     */
+    public void register(OpModeManager manager) {
 
     /*
      * register your op modes here.
@@ -55,17 +55,17 @@ public class FtcOpModeRegister implements OpModeRegister {
      * If two or more op modes are registered with the same name, the app will display an error.
      */
 
-    manager.register("NullOp", NullOp.class);
-    manager.register("K9TeleOp", K9TeleOp.class);
-    manager.register("K9TankDrive", K9TankDrive.class);
-    manager.register("K9Line", K9Line.class);
-    manager.register("K9IrSeeker", K9IrSeeker.class);
-    manager.register("K9AutoTime", K9AutoTime.class);
+        manager.register("NullOp", NullOp.class);
+        manager.register("K9TeleOp", K9TeleOp.class);
+        manager.register("K9TankDrive", K9TankDrive.class);
+        manager.register("K9Line", K9Line.class);
+        manager.register("K9IrSeeker", K9IrSeeker.class);
+        manager.register("K9AutoTime", K9AutoTime.class);
     /*
     manager.register("IrSeekerOp", IrSeekerOp.class);
     manager.register("CompassCalibration", CompassCalibration.class);
     manager.register("NxtTeleOp", NxtTeleOp.class);
     manager.register("NxtEncoderOp", NxtEncoderOp.class);
     */
-  }
+    }
 }

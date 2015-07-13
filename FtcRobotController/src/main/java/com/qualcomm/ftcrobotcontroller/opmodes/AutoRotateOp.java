@@ -37,88 +37,88 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 public class AutoRotateOp extends OpMode {
 
-  // we will consider our goal reached if we are +/- ERROR_MARGIN degrees
-  final static double ERROR_MARGIN = 5.0; // in degrees
+    // we will consider our goal reached if we are +/- ERROR_MARGIN degrees
+    final static double ERROR_MARGIN = 5.0; // in degrees
 
-  // how long to hold our goal position
-  final static double HOLD_POSITION = 3.0; // in seconds
+    // how long to hold our goal position
+    final static double HOLD_POSITION = 3.0; // in seconds
 
-  // wheel speed while moving to our goal
-  final static double MOTOR_POWER = 0.2; // scale from 0 to 1
+    // wheel speed while moving to our goal
+    final static double MOTOR_POWER = 0.2; // scale from 0 to 1
 
-  // each goal direction in degrees
-  final static double GOALS[] = { 0.0, 90.0, 180.0, 270.0 };
+    // each goal direction in degrees
+    final static double GOALS[] = {0.0, 90.0, 180.0, 270.0};
 
-  // index of the current goal
-  int currentGoal = 0;
+    // index of the current goal
+    int currentGoal = 0;
 
-  // when paused time as passed, we will proceed to the next goal
-  double pauseTime = 0.0;
+    // when paused time as passed, we will proceed to the next goal
+    double pauseTime = 0.0;
 
-  CompassSensor compass;
-  DcMotor motorRight;
-  DcMotor motorLeft;
+    CompassSensor compass;
+    DcMotor motorRight;
+    DcMotor motorLeft;
 
-  public AutoRotateOp() {
+    public AutoRotateOp() {
 
-  }
-
-  @Override
-  public void start() {
-    compass = hardwareMap.compassSensor.get("compass");
-    motorRight = hardwareMap.dcMotor.get("right");
-    motorLeft = hardwareMap.dcMotor.get("left");
-
-    motorRight.setDirection(DcMotor.Direction.REVERSE);
-
-    // calculate how long should we hold the current position
-    pauseTime = time + HOLD_POSITION;
-  }
-
-  @Override
-  public void loop() {
-
-    // make sure pauseTime has passed before we take any action
-    if (time > pauseTime) {
-
-      // get our current direction
-      double facing = compass.getDirection();
-
-      // have we reached our goal direction?
-      if (!hasReachedDegree(GOALS[currentGoal], facing)) {
-        // no, move toward our goal
-        DbgLog.msg("moving from " + facing + " toward " + GOALS[currentGoal]);
-
-        // rotate the robot towards our goal direction
-        motorRight.setPower(-MOTOR_POWER);
-        motorLeft.setPower(MOTOR_POWER);
-      } else {
-        // yes, set a new goal
-        DbgLog.msg("holding " + facing);
-
-        motorRight.setPower(0.0);
-        motorLeft.setPower(0.0);
-
-        // set a new goal direction
-        currentGoal = (currentGoal + 1) % GOALS.length;
-
-        // set a new pauseTime
-        pauseTime = time + HOLD_POSITION;
-      }
     }
-  }
 
-  // check if we reached our target degree, +/- ERROR_MARGIN
-  private boolean hasReachedDegree(double target, double current) {
-    return (
-        (Math.abs(target - (current      ))) < ERROR_MARGIN ||
-        (Math.abs(target - (current - 360))) < ERROR_MARGIN ||
-        (Math.abs(target - (current + 360))) < ERROR_MARGIN);
-  }
+    @Override
+    public void start() {
+        compass = hardwareMap.compassSensor.get("compass");
+        motorRight = hardwareMap.dcMotor.get("right");
+        motorLeft = hardwareMap.dcMotor.get("left");
 
-  @Override
-  public void stop() {
+        motorRight.setDirection(DcMotor.Direction.REVERSE);
 
-  }
+        // calculate how long should we hold the current position
+        pauseTime = time + HOLD_POSITION;
+    }
+
+    @Override
+    public void loop() {
+
+        // make sure pauseTime has passed before we take any action
+        if (time > pauseTime) {
+
+            // get our current direction
+            double facing = compass.getDirection();
+
+            // have we reached our goal direction?
+            if (!hasReachedDegree(GOALS[currentGoal], facing)) {
+                // no, move toward our goal
+                DbgLog.msg("moving from " + facing + " toward " + GOALS[currentGoal]);
+
+                // rotate the robot towards our goal direction
+                motorRight.setPower(-MOTOR_POWER);
+                motorLeft.setPower(MOTOR_POWER);
+            } else {
+                // yes, set a new goal
+                DbgLog.msg("holding " + facing);
+
+                motorRight.setPower(0.0);
+                motorLeft.setPower(0.0);
+
+                // set a new goal direction
+                currentGoal = (currentGoal + 1) % GOALS.length;
+
+                // set a new pauseTime
+                pauseTime = time + HOLD_POSITION;
+            }
+        }
+    }
+
+    // check if we reached our target degree, +/- ERROR_MARGIN
+    private boolean hasReachedDegree(double target, double current) {
+        return (
+                (Math.abs(target - (current))) < ERROR_MARGIN ||
+                        (Math.abs(target - (current - 360))) < ERROR_MARGIN ||
+                        (Math.abs(target - (current + 360))) < ERROR_MARGIN);
+    }
+
+    @Override
+    public void stop() {
+
+    }
 
 }

@@ -1,0 +1,159 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NewFtcConfigurationActivity">
+
+    <include
+        android:id="@+id/included_header"
+        layout="@layout/header" />
+
+    <LinearLayout
+        android:id="@+id/holdsDevices"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/scan_bottom"
+        android:layout_below="@id/included_header"
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/scanButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:text="@string/scan"
+                android:textSize="12sp" />
+
+            <include
+                android:id="@+id/devices_scan_info_btn"
+                layout="@layout/info_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:onClick="devices_scan_info" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/warning_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal" />
+
+        <!-- red line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:background="@color/red" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <RelativeLayout
+                android:id="@+id/devices_holder"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/devices"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/devices"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <include
+                    android:id="@+id/devices_info_btn"
+                    layout="@layout/info_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="devices_info" />
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:orientation="vertical">
+
+                <ListView
+                    android:id="@+id/controllersList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:id="@+id/empty_deviceList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/scan_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:paddingBottom="5dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="8dp">
+
+        <!-- red line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:background="@color/red" />
+
+        <RelativeLayout
+            android:id="@+id/save_holder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/writeXML"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:onClick="saveConfiguration"
+                android:text="@string/save_configuration"
+                android:textSize="12sp" />
+
+            <include
+                android:id="@+id/save_config_btn"
+                layout="@layout/info_button"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:onClick="save_config" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout><!-- From: file:/F:/Users/David/Documents/Robotics/SDK/ftc_app/FtcRobotController/src/main/res/layout/activity_ftc_configuration.xml -->

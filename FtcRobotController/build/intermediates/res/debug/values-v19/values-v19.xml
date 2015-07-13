@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/F:/Users/David/Documents/Robotics/SDK/ftc_app/FtcRobotController/build/intermediates/exploded-aar/com.android.support/leanback-v17/22.2.0/res/values-v19/values-v19.xml -->
+    <eat-comment/>
+    <style name="Theme.LeanbackBase" parent="android:Theme.Holo.NoActionBar.TranslucentDecor">
+        <item name="playbackProgressPrimaryColor">@color/lb_playback_progress_color_no_theme</item>
+        <item name="playbackControlsIconHighlightColor">@color/lb_playback_icon_highlight_no_theme</item>
+        <item name="defaultBrandColor">@color/lb_default_brand_color</item>
+
+        <item name="android:windowOverscan">true</item>
+        <item name="guidedStepTheme">@style/Theme.Leanback.GuidedStep</item>
+    </style>
+</resources>

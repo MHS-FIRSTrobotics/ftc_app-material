@@ -40,47 +40,47 @@ import java.util.Locale;
 
 /**
  * TeleOp Mode
- * <p>
- *Enables control of the robot via the gamepad
+ * <p/>
+ * Enables control of the robot via the gamepad
  */
 public class NullOp extends OpMode {
 
-  private String startDate;
-  private ElapsedTime runtime = new ElapsedTime();
+    private String startDate;
+    private ElapsedTime runtime = new ElapsedTime();
 
-  /**
-   * Constructor
-   */
-  public NullOp() {
+    /**
+     * Constructor
+     */
+    public NullOp() {
 
-  }
+    }
 
-  /*
-   * Code to run when the op mode is first enabled goes here
-   * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#start()
-   */
-  @Override
-  public void start() {
-    startDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.US).format(new Date());
-    runtime.reset();
-  }
+    /*
+     * Code to run when the op mode is first enabled goes here
+     * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#start()
+     */
+    @Override
+    public void start() {
+        startDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.US).format(new Date());
+        runtime.reset();
+    }
 
-  /*
-   * This method will be called repeatedly in a loop
-   * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#loop()
-   */
-  @Override
-  public void loop() {
-    telemetry.addData("1 Start", "NullOp started at " + startDate);
-    telemetry.addData("2 Status", "running for " + runtime.toString());
-  }
+    /*
+     * This method will be called repeatedly in a loop
+     * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#loop()
+     */
+    @Override
+    public void loop() {
+        telemetry.addData("1 Start", "NullOp started at " + startDate);
+        telemetry.addData("2 Status", "running for " + runtime.toString());
+    }
 
-  /*
-   * Code to run when the op mode is first disabled goes here
-   * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#stop()
-   */
-  @Override
-  public void stop() {
+    /*
+     * Code to run when the op mode is first disabled goes here
+     * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#stop()
+     */
+    @Override
+    public void stop() {
 
-  }
+    }
 }

@@ -51,135 +51,160 @@ import com.qualcomm.wirelessp2p.WifiDirectChannelSelection;
 import java.io.IOException;
 
 public class FtcWifiChannelSelectorActivity extends Activity
-    implements OnItemSelectedListener, OnClickListener {
+        implements OnItemSelectedListener, OnClickListener {
 
-  private static final int INVALID = WifiDirectChannelSelection.INVALID;
-  private static int spinnerSelection = 0;
+    private static final int INVALID = WifiDirectChannelSelection.INVALID;
+    private static int spinnerSelection = 0;
 
-  private Button buttonConfigure;
-  private Button buttonWifiSettings;
-  private Spinner spinner;
-  private ProgressDialog progressDialog;
+    private Button buttonConfigure;
+    private Button buttonWifiSettings;
+    private Spinner spinner;
+    private ProgressDialog progressDialog;
 
 
-  private WifiDirectChannelSelection wifiConfig;
+    private WifiDirectChannelSelection wifiConfig;
 
-  private int wifi_direct_class   = -1;
-  private int wifi_direct_channel = -1;
+    private int wifi_direct_class = -1;
+    private int wifi_direct_channel = -1;
 
-  private Context context;
+    private Context context;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_ftc_wifi_channel_selector);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_ftc_wifi_channel_selector);
 
-    context = this;
+        context = this;
 
-    spinner = (Spinner) findViewById(R.id.spinnerChannelSelect);
-    ArrayAdapter<CharSequence> adapter =
-        ArrayAdapter.createFromResource(this, R.array.wifi_direct_channels,
-            android.R.layout.simple_spinner_item);
-    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    spinner.setAdapter(adapter);
-    spinner.setOnItemSelectedListener(this);
+        spinner = (Spinner) findViewById(R.id.spinnerChannelSelect);
+        ArrayAdapter<CharSequence> adapter =
+                ArrayAdapter.createFromResource(this, R.array.wifi_direct_channels,
+                        android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
 
-    buttonConfigure = (Button) findViewById(R.id.buttonConfigure);
-    buttonConfigure.setOnClickListener(this);
+        buttonConfigure = (Button) findViewById(R.id.buttonConfigure);
+        buttonConfigure.setOnClickListener(this);
 
-    buttonWifiSettings = (Button) findViewById(R.id.buttonWifiSettings);
-    buttonWifiSettings.setOnClickListener(this);
+        buttonWifiSettings = (Button) findViewById(R.id.buttonWifiSettings);
+        buttonWifiSettings.setOnClickListener(this);
 
-    WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
-    wifiConfig = new WifiDirectChannelSelection(this, wifiManager);
-  }
+        WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
+        wifiConfig = new WifiDirectChannelSelection(this, wifiManager);
+    }
 
-  @Override
-  protected void onStart() {
-    super.onStart();
-    spinner.setSelection(spinnerSelection);
-  }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        spinner.setSelection(spinnerSelection);
+    }
 
-  @Override
-  public void onItemSelected(AdapterView<?> av, View v, int item, long l) {
-    switch(item) {
-      case  0: wifi_direct_class = INVALID; wifi_direct_channel = INVALID; break;
+    @Override
+    public void onItemSelected(AdapterView<?> av, View v, int item, long l) {
+        switch (item) {
+            case 0:
+                wifi_direct_class = INVALID;
+                wifi_direct_channel = INVALID;
+                break;
 
-      case  1: wifi_direct_class =  81; wifi_direct_channel =   1; break;
-      case  2: wifi_direct_class =  81; wifi_direct_channel =   6; break;
-      case  3: wifi_direct_class =  81; wifi_direct_channel =  11; break;
+            case 1:
+                wifi_direct_class = 81;
+                wifi_direct_channel = 1;
+                break;
+            case 2:
+                wifi_direct_class = 81;
+                wifi_direct_channel = 6;
+                break;
+            case 3:
+                wifi_direct_class = 81;
+                wifi_direct_channel = 11;
+                break;
 /*
       case  4: wifi_direct_class = 115; wifi_direct_channel =  36; break;
       case  5: wifi_direct_class = 115; wifi_direct_channel =  40; break;
       case  6: wifi_direct_class = 115; wifi_direct_channel =  44; break;
       case  7: wifi_direct_class = 115; wifi_direct_channel =  48; break;
 */
-      case  4: wifi_direct_class = 124; wifi_direct_channel = 149; break;
-      case  5: wifi_direct_class = 124; wifi_direct_channel = 153; break;
-      case  6: wifi_direct_class = 124; wifi_direct_channel = 157; break;
-      case  7: wifi_direct_class = 124; wifi_direct_channel = 161; break;
+            case 4:
+                wifi_direct_class = 124;
+                wifi_direct_channel = 149;
+                break;
+            case 5:
+                wifi_direct_class = 124;
+                wifi_direct_channel = 153;
+                break;
+            case 6:
+                wifi_direct_class = 124;
+                wifi_direct_channel = 157;
+                break;
+            case 7:
+                wifi_direct_class = 124;
+                wifi_direct_channel = 161;
+                break;
+        }
     }
-  }
 
-  @Override
-  public void onNothingSelected(AdapterView<?> av) {
-    // take no action
-  }
-
-  @Override
-  public void onClick(View v) {
-    switch (v.getId()) {
-      case R.id.buttonConfigure:
-        spinnerSelection = spinner.getSelectedItemPosition();
-        configure();
-        break;
-      case R.id.buttonWifiSettings:
-        DbgLog.msg("launch wifi settings");
-
-        startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
-        break;
+    @Override
+    public void onNothingSelected(AdapterView<?> av) {
+        // take no action
     }
-  }
 
-  private void configure() {
-    DbgLog.msg(String.format("configure p2p channel - class %d channel %d",
-        wifi_direct_class, wifi_direct_channel));
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.buttonConfigure:
+                spinnerSelection = spinner.getSelectedItemPosition();
+                configure();
+                break;
+            case R.id.buttonWifiSettings:
+                DbgLog.msg("launch wifi settings");
 
-    try {
-      progressDialog = ProgressDialog.show(this, "Configuring Channel", "Please Wait", true);
+                startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                break;
+        }
+    }
 
-      wifiConfig.config(wifi_direct_class, wifi_direct_channel);
-      new Thread(new Runnable() {
-        @Override
-        public void run() {
-          try {
-            Thread.sleep(5 * 1000); // in milliseconds
-          } catch (InterruptedException ignored) { } // ignore
+    private void configure() {
+        DbgLog.msg(String.format("configure p2p channel - class %d channel %d",
+                wifi_direct_class, wifi_direct_channel));
 
-          runOnUiThread(new Runnable() {
+        try {
+            progressDialog = ProgressDialog.show(this, "Configuring Channel", "Please Wait", true);
+
+            wifiConfig.config(wifi_direct_class, wifi_direct_channel);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(5 * 1000); // in milliseconds
+                    } catch (InterruptedException ignored) {
+                    } // ignore
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            setResult(RESULT_OK);
+                            progressDialog.dismiss();
+                            finish();
+                        }
+                    });
+                }
+            }).start();
+        } catch (IOException e) {
+            toast("Failed - root is required", Toast.LENGTH_SHORT);
+            e.printStackTrace();
+        }
+    }
+
+    private void toast(final String msg, final int toastLength) {
+        Runnable toast = new Runnable() {
             @Override
             public void run() {
-              setResult(RESULT_OK);
-              progressDialog.dismiss();
-              finish();
+                Toast.makeText(context, msg, toastLength).show();
             }
-          });
-        }
-      }).start();
-    } catch (IOException e) {
-      toast("Failed - root is required", Toast.LENGTH_SHORT);
-      e.printStackTrace();
+        };
+
+        runOnUiThread(toast);
     }
-  }
-
-  private void toast(final String msg, final int toastLength) {
-    Runnable toast = new Runnable() {
-      @Override
-      public void run() {
-        Toast.makeText(context, msg, toastLength).show();
-      }
-    };
-
-    runOnUiThread(toast);
-  }
 }

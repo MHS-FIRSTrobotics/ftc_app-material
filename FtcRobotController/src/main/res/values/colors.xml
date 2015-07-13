@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="light_accent">@color/material_deep_teal_200</color>
-  <color name="dark_accent">@color/material_deep_teal_500</color>
-  <color name="white">#FFFF</color>
-  <color name="red">#F44336</color>
-  <color name="red_light">#E57373</color>
-  <color name="primary_color">#f0b310</color>
-  <color name="primary_color_light">#f0c85e</color>
+    <color name="light_accent">@color/material_deep_teal_200</color>
+    <color name="dark_accent">@color/material_deep_teal_500</color>
+    <color name="white">#FFFF</color>
+    <color name="red">#F44336</color>
+    <color name="red_light">#E57373</color>
+    <color name="primary_color">#f0b310</color>
+    <color name="primary_color_light">#f0c85e</color>
 </resources>

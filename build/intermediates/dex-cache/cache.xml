@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\com.android.support\leanback-v17\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="34b1bfb315bb66c080201bcf01b6954a96f91ebb">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-d87ff5de81cc990b24716eaf2191b61a197aad64.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\libs\d2xx.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="549d88cce99830dc2ae951a13d5a8b897362351b">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\d2xx-1c084fd49457e19cb8dafabe802b0068bdded370.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-7f87e0f3178eca3f4c6330eca4f0ab235598a15f.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-91f18d739695a0a708e4e0e12da80f960141338b.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a971da16e0a2d6eb5927ecfa41025a9c0036d38b">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-dec291c19793cde174432cca61e5176ae3e20a62.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\FtcCommon-release\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d497a396a8987f0ce6953958091d5806da1914db">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-7e306587e7c5c683c44e517afeeb2cda25f2ddec.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\com.android.support\palette-v7\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="060b30a619b8d3ba053e1d7dc08b3fdf0dd81530">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-cea9fff62b8464415ffbd01ecf9e93d15baab37f.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\com.android.support\support-v13\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9aa93835393824b436f366120c9ba8a0260ce75d">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-a3bab3249437800665f20c5be40c6c4a09bf494a.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\com.android.support\support-v13\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="79a5b6d9fbab3b5fb4c6f86a1ed7a17722fd937b">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-5e1f49f43bfd3d56a5652fec2e0468ed67593f3f.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0632f06970823b7e3436f649bfa65b47035c91d0">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-4fddb1f7381223e5b72a3f9c6c68ff7b8a9625a9.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-0de8d9cade2658a868590b0b767dfbeef1d835ee.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\ModernRobotics-release\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="044a681a47f98f3be83a8843c89e79f384a34f65">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-9cb74ad4c3ebdaf944a4fd59b9c39c1408234d74.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\FtcCommon-release\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d497a396a8987f0ce6953958091d5806da1914db">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-7e306587e7c5c683c44e517afeeb2cda25f2ddec.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\Analytics-release\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3307735cfd8fa53fb4b406c12d104b9cc04b8cf6">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-5cd73c8985e628fa1b54afa1febfb343191f3be9.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5b37cf49773f7f17aca9830efd3053b0cac56728">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-58c618407fa733d4cbdedddff593b4ddb892512a.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\libs\d2xx.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="549d88cce99830dc2ae951a13d5a8b897362351b">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\d2xx-1c084fd49457e19cb8dafabe802b0068bdded370.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a971da16e0a2d6eb5927ecfa41025a9c0036d38b">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-dec291c19793cde174432cca61e5176ae3e20a62.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\WirelessP2p-release\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="db35b15ad90fff8d96568fa5e1ef7f175b6f7d14">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-9706cef873d0fcb54656371cd5fe143e8ec96aaf.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\com.android.support\cardview-v7\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="97f7e239e86ef994de894818fdd8a71d2e89d6aa">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-0d2c8b071d20f9d61560126dd20b22da4cc11c7a.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\Analytics-release\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3307735cfd8fa53fb4b406c12d104b9cc04b8cf6">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-5cd73c8985e628fa1b54afa1febfb343191f3be9.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="dcf8c83c3dead00a6c4fe313e95f7aaca20dc641">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-3ce22be6356adb72b72f3c0548ae870a1f295a30.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\WirelessP2p-release\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="db35b15ad90fff8d96568fa5e1ef7f175b6f7d14">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-9706cef873d0fcb54656371cd5fe143e8ec96aaf.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\ModernRobotics-release\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="044a681a47f98f3be83a8843c89e79f384a34f65">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-9cb74ad4c3ebdaf944a4fd59b9c39c1408234d74.jar" />
+    </item>
+    <item
+        jar="C:\Intel\INDE\IDEintegration\android-sdk-windows\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-763f92bfdf707777ffc741721a16335a188eece8.jar" />
+    </item>
+    <item
+        jar="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\exploded-aar\com.android.support\gridlayout-v7\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4c72b7305d9c42d7729d66694dc984f69896a844">
+        <dex dex="F:\Users\David\Documents\Robotics\SDK\ftc_app\FtcRobotController\build\intermediates\pre-dexed\debug\classes-6240059ff401c15a44ffedb95e0e25cbc6dab3d2.jar" />
+    </item>
+
+</items>
