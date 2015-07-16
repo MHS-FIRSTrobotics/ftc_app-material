@@ -1,141 +1,195 @@
 package com.qualcomm.ftcrobotcontroller.opmodes.autonomous;
 
+import android.support.annotation.NonNull;
+
+import com.qualcomm.ftccommon.DbgLog;
 import com.qualcomm.robotcore.util.RobotLog;
 
 
+/**
+ * This class controls how the RunLevels are ran and how the are ran.
+ * It provides a means of running <code>runLevel</code>s that does not affect how
+ * the standard OpMode is ran.
+ *
+ * @author David S. FTC5395
+ * @version 0.1.1
+ */
 public class Autonomous implements Runnable {
-    public RobotState roboState;
+    public RobotState robotState;
     private RunLevel[] levels;
-    private RunLevel init;
+
     private int initLevel;
-    private RunLevel finish;
     private int stopLevel;
-    private RunLevel safe;
     private int safeLevel;
+
     private boolean done;
 
-    public Autonomous(int amount, RobotState state) {
+    /**
+     * Builds a Automouous object with a specified amount of <code>Runlevels</code>
+     * and, associated with a specific <code>RobotState</code> object.
+     *
+     * @param amount the number of RunLevels to generate for operation
+     * @param state a <code>RobotState</code> object to manage operations
+     * @throws IllegalArgumentException If amount < 3
+     * @throws NullPointerException If state argument is null
+     * @since 0.1.0
+     */
+    public Autonomous(int amount, RobotState state) throws IllegalArgumentException, NullPointerException {
         if (amount < 3) {
             throw new IllegalArgumentException("States be less than three");
+        }
+        if (state == null) {
+            throw new NullPointerException("state cannot be null");
         }
 
         levels = new RunLevel[amount - 1];
 
-        SetInitState(0);
-        SetSafeState(amount - 1);
-        SetFinishState(amount - 1);
+        setInitState(0);
+        setSafeState(amount - 1);
+        setFinishState(amount - 1);
 
-        roboState = state;
+        robotState = state;
         done = false;
     }
 
-    public Autonomous(RunLevel[] states, RobotState state) {
+    /**
+     * Builds an Autonomous object based on an array of <code>runLevel</code>s and a <code>RobotState
+     * </code> object.
+     * @param states An array of <code>runLevel</code>s
+     * @param state A <code>RobotState</code> used to manage autonomous operations
+     * @throws NullPointerException If either states or state is null.
+     */
+    public Autonomous(RunLevel[] states, RobotState state) throws NullPointerException {
         if (states == null) {
-            throw new IllegalArgumentException("States can not be null.");
+            throw new NullPointerException("States cannot be equal" +
+                    " to nothing");
         }
+        if (state == null) {
+            throw new NullPointerException("state cannot be null");
+        }
+
+        // Set globals to their new values
         levels = states;
-
-        SetInitState(0);
-        SetSafeState(states.length - 1);
-        SetFinishState(states.length - 1);
-
-        roboState = state;
+        robotState = state;
         done = false;
+
+        // Sets the default RunLevels
+        setInitState(0);
+        setSafeState(states.length - 1);
+        setFinishState(states.length - 1);
     }
 
-    public synchronized RunLevel[] GetRunLevels() {
+    /**
+     * Returns an array of <code>runLevel</code>s that is associated with <code>Autonomous</code>
+     *
+     * @return an array of <code>runLevel</code>
+     * @since 0.1.0
+     */
+    @NonNull
+    public synchronized RunLevel[] getRunLevels() {
         return levels;
     }
 
-    public synchronized void SetRunLevels(RunLevel[] newLevels) {
-        if (stopLevel == initLevel) {
-            throw new IllegalStateException("Stop and Init Levels are the same, please specify the " +
-                    "new levels.");
-        }
-        if (newLevels != null) {
-            levels = newLevels;
+    /**
+     * Changes the array of <code>runLevel</code>s for use by <code>Autonomous</code>
+     *
+     * @param newLevels <code>runLevel</code> array to use
+     * @throws IllegalStateException the init level is the same as the stopping level
+     * @since 0.1.0
+     */
+    public synchronized void setRunLevels(@NonNull RunLevel[] newLevels) throws IllegalStateException{
+        if (initLevel != stopLevel) {
+            throw new IllegalStateException("initLevel and stopLevel are the same! This is bad.");
         }
 
         //Set the new important levels
-        SetInitState(initLevel);
-        SetFinishState(stopLevel);
-        SetFinishState(safeLevel);
+        setInitState(initLevel);
+        setFinishState(stopLevel);
+        setFinishState(safeLevel);
 
         //Check final state
         isValidState(initLevel);
         isValidState(stopLevel);
     }
 
-    public synchronized void SetRunLevels(RunLevel[] newLevels, int newInit, int newFinish, int newSafe) {
-        if (newInit < newLevels.length && newInit >= 0) {
-            initLevel = newInit;
-        } else {
-            throw new IllegalArgumentException("newInit is a invalid runlevel");
+    /**
+     * Changes the <code>runLevel</code> array that <code>Autonomous</code> uses. This also provides
+     * any opportunity to change the special levels used.
+     * @param newLevels The <code>runLevel</code> array to use (replaces the old)
+     * @param newInit The index of the init runLevel
+     * @param newFinish The index of the stop runLevel
+     * @param newSafe The index of the safe runLevel
+     * @throws IllegalArgumentException Gets thrown when any index you specifed does not exist in
+     *  your array
+     *  @since 0.1.0
+     */
+    public synchronized void setRunLevels(@NonNull RunLevel[] newLevels, int newInit, int newFinish, int newSafe) throws IllegalArgumentException {
+        if (!(newInit < newLevels.length && newInit >= 0)) {
+            throw new IllegalArgumentException("Parameter newInit is invalid.");
+        }
+        if (!(newFinish < newLevels.length && newFinish >= 0)) {
+            throw new IllegalArgumentException("Parameter newFinish is invalid.");
+        }
+        if (!(newSafe < newLevels.length && newSafe >= 0)) {
+            throw new IllegalArgumentException("Parameter newSafe is invalid.");
         }
 
-        if (newFinish < newLevels.length && newFinish >= 0) {
-            stopLevel = newFinish;
-        } else {
-            throw new IllegalArgumentException("newFinish is a invalid runlevel");
-        }
+        initLevel = newInit;
+        stopLevel = newFinish;
+        safeLevel = newSafe;
 
-        if (newSafe < newLevels.length && newSafe >= 0) {
-            safeLevel = newSafe;
-        } else {
-            throw new IllegalArgumentException("newSafe is a invalid runlevel");
-        }
-
-        //Pass to main SetRunLevels
-        SetRunLevels(newLevels);
+        //Pass to main setRunLevels
+        setRunLevels(newLevels);
     }
 
-    public void RunInitLevel() {
-        RunLevel(initLevel);
-    }
-
-    public void RunFinishLevel() {
-        RunLevel(stopLevel);
-    }
-
-    public synchronized void SetInitState(int level) {
+    /**
+     * Changes the init level to use
+     *
+     * @param level The index of the init state in the current <code>runLevel</code> array
+     * @throws IllegalArgumentException Thrown when the index is not valid
+     * @throws IllegalStateException Thrown when the <code>runLevel</code> array is null.
+     * @since 0.1.0
+     */
+    public synchronized void setInitState(int level) throws IllegalArgumentException, IllegalStateException {
         if (levels != null) {
             throw new IllegalStateException("All states are null.");
         }
         if (isValidLevelNum(level)) {
-            init = levels[level];
             initLevel = level;
         } else {
             throw new IllegalArgumentException("Level must be between 0 and" + levels.length);
         }
     }
 
-    public synchronized void SetFinishState(int level) {
-        if (levels != null) {
-            throw new IllegalStateException("All states are null.");
+    /**
+     * Changes the stop level to use
+     *
+     * @param level The index of the stop state in the current <code>runLevel</code> array
+     * @throws IllegalArgumentException Thrown when the index is not valid
+     * @throws IllegalStateException Thrown when the <code>runLevel</code> array is null.
+     * @since 0.1.0
+     */
+    public synchronized void setFinishState(int level) throws IllegalArgumentException, IllegalStateException {
+        assert (levels != null);
+        if (!isValidLevelNum(level)) {
+            throw new IllegalArgumentException();
         }
-        if (isValidLevelNum(level)) {
-            finish = levels[level];
-            stopLevel = level;
-        } else {
-            throw new IllegalArgumentException("Level must be between 0 and" + levels.length);
-        }
+
+        stopLevel = level;
     }
 
-    public synchronized void SetSafeState(int level) {
-        if (levels != null) {
-            throw new IllegalStateException("All states are null.");
+    public synchronized void setSafeState(int level) {
+        assert (levels != null);
+        if (!isValidLevelNum(level)) {
+            throw new IllegalArgumentException();
         }
-        if (isValidLevelNum(level)) {
-            safe = levels[level];
-            safeLevel = level;
-        } else {
-            throw new IllegalArgumentException("Level must be between 0 and" + levels.length);
-        }
+
+        safeLevel = level;
     }
 
-    public int RunLevel(int level) {
-        if (isValidLevelNum(level)) {
-            return -1;
+    public int runLevel(int level) {
+        if (!isValidLevelNum(level)) {
+            throw new IllegalArgumentException();
         }
 
         int execReturn;
@@ -147,22 +201,22 @@ public class Autonomous implements Runnable {
         }
 
         //Log result
-        RobotLog.i("RunLevel " + level + " returned a status code of " + execReturn);
+        RobotLog.i("runLevel " + level + " returned a status code of " + execReturn);
 
         //Check if zero has been returned, if so, continue
         if (execReturn == 0) {
-            RobotLog.i("RunLevel " + level + " succeeded.");
+            RobotLog.i("runLevel " + level + " succeeded.");
             return 0;
 
             // Zero was not returned
         } else {
             if (execReturn > 0) {
-                RobotLog.w("RunLevel " + level + " returned a status code of " + execReturn);
+                RobotLog.w("runLevel " + level + " returned a status code of " + execReturn);
                 int safe = levels[level].safe(execReturn);
             } else {
-                RobotLog.e("RunLevel " + level + " returned a status code of " + execReturn);
+                RobotLog.e("runLevel " + level + " returned a status code of " + execReturn);
                 if (!levels[level].safe()) {
-                    throw new RuntimeException("Not safe to continue! This was declared by RunLevel: " + level);
+                    throw new RuntimeException("Not safe to continue! This was declared by runLevel: " + level);
                 }
             }
         }
@@ -170,16 +224,41 @@ public class Autonomous implements Runnable {
         return execReturn;
     }
 
+    public int runInitLevel() {
+        int result = 0;
+        try {
+                result = runLevel(initLevel);
+        } catch (IllegalArgumentException ex) {
+            DbgLog.error("InitLevel has an illegal argument:" + ex.getMessage());
+        }
+
+        return result;
+        // TODO: handle errors with init level
+    }
+
+    public int runFinishLevel() {
+        int result = 0;
+        try {
+            result = runLevel(stopLevel);
+        } catch (IllegalArgumentException ex) {
+            DbgLog.error("InitLevel has an illegal argument:" + ex.getMessage());
+        }
+
+        // TODO: handle errors with stop level
+        return result;
+    }
+
+    // Handle main execution
 
     public void start() {
-        RunLevel(initLevel);
+        runLevel(initLevel);
     }
 
     public void run() {
         //Run everything between initLevel and stopLevel
         for (int i = initLevel + 1; i < stopLevel; i++) {
             try {
-                RunLevel(i);
+                runLevel(i);
             } catch (RuntimeException ex) {
                 RobotLog.logStacktrace(ex);
                 break;
@@ -189,24 +268,24 @@ public class Autonomous implements Runnable {
         done = true;
     }
 
+    public void close() {
+        if (!isValidLevelNum(stopLevel)) {
+            throw new IllegalStateException();
+        }
+
+        runLevel(stopLevel);
+    }
+
+    // Check object states
+
     public synchronized boolean isDone() {
         return done;
     }
 
-    public void close() {
-        RunLevel(stopLevel);
-    }
-
     public boolean isValidState() {
-        if (levels == null) {
-            return false;
-        }
-
-        if (init == null) {
-            return false;
-        }
-
-        return finish != null;
+        return (levels != null) &&
+                (levels[stopLevel] != null) &&
+                (levels[initLevel] != null);
     }
 
     public boolean isValidState(int level) {

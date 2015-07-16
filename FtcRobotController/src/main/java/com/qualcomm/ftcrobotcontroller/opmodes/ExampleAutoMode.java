@@ -44,18 +44,18 @@ public class ExampleAutoMode extends AutoMode {
 
         /* Optional
         // Set the states to their defaults
-        runner.SetInitState(0);
-        runner.SetSafeState(levels.length - 1);
-        runner.SetFinishState(levels.length - 1);
+        runner.setInitState(0);
+        runner.setSafeState(levels.length - 1);
+        runner.setFinishState(levels.length - 1);
         */
 
-        //TODO: write your constructor here
+        // TODO: write your constructor here
     }
 
     @Override
     public void start() {
         super.init();
-        //TODO: write your init here
+        // TODO: write your init here
     }
 
 
